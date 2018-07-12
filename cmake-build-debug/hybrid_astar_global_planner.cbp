@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="hybrid_astar_global_planner"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="hybrid_astar_global_planner">
+				<Option output="/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/hybrid_astar_global_planner" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include"/>
+					<Add directory="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner"/>
+					<Add directory="/opt/ros/kinetic/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 hybrid_astar_global_planner"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="hybrid_astar_global_planner/fast">
+				<Option output="/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/hybrid_astar_global_planner" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include"/>
+					<Add directory="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner"/>
+					<Add directory="/opt/ros/kinetic/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 hybrid_astar_global_planner/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/algorithm.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/bucketedqueue.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/collisiondetection.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/constants.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/dubins.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/dynamicvoronoi.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/gradient.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/helper.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/lookup.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/node2d.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/node3d.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/path.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/planner.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/point.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/smoother.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/vector2d.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrid_astar/visualize.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner/astar.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner/dijkstra.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner/expander.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner/gradient_path.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner/grid_path.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner/orientation_filter.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner/planner_core.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner/potential_calculator.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner/quadratic_calculator.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/include/hybrida_global_planner/traceback.h">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/astar.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/dijkstra.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/gradient_path.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/grid_path.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/algorithm.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/bucketedqueue.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/collisiondetection.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/dubins.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/dynamicvoronoi.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/node2d.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/node3d.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/path.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/planner.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/smoother.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/tf_broadcaster.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/hybrid_astar/visualize.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/orientation_filter.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/plan_node.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/planner_core.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/src/quadratic_calculator.cpp">
+			<Option target="hybrid_astar_global_planner"/>
+		</Unit>
+		<Unit filename="/home/mark/catkin_ws/src/hybrid_astar_global_planner/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
