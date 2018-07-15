@@ -7,16 +7,6 @@ include_directories(include)
 include_directories(include/hybrida_global_planner)
 include_directories(/opt/ros/kinetic/include)
 add_executable(hybrid_astar_global_planner
-        include/hybrida_global_planner/astar.h
-        include/hybrida_global_planner/dijkstra.h
-        include/hybrida_global_planner/expander.h
-        include/hybrida_global_planner/gradient_path.h
-        include/hybrida_global_planner/grid_path.h
-        include/hybrida_global_planner/orientation_filter.h
-        include/hybrida_global_planner/planner_core.h
-        include/hybrida_global_planner/potential_calculator.h
-        include/hybrida_global_planner/quadratic_calculator.h
-        include/hybrida_global_planner/traceback.h
         include/hybrid_astar/algorithm.h
         include/hybrid_astar/bucketedqueue.h
         include/hybrid_astar/collisiondetection.h
@@ -34,6 +24,17 @@ add_executable(hybrid_astar_global_planner
         include/hybrid_astar/smoother.h
         include/hybrid_astar/vector2d.h
         include/hybrid_astar/visualize.h
+        include/hybrida_global_planner/astar.h
+        include/hybrida_global_planner/dijkstra.h
+        include/hybrida_global_planner/expander.h
+        include/hybrida_global_planner/gradient_path.h
+        include/hybrida_global_planner/grid_path.h
+        include/hybrida_global_planner/orientation_filter.h
+        include/hybrida_global_planner/planner_core.h
+        include/hybrida_global_planner/potential_calculator.h
+        include/hybrida_global_planner/quadratic_calculator.h
+        include/hybrida_global_planner/traceback.h
+
         src/astar.cpp
         src/dijkstra.cpp
         src/gradient_path.cpp
