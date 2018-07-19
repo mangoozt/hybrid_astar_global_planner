@@ -32,15 +32,14 @@
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  *
- * Author: Eitan Marder-Eppstein
- *         David V. Lu!!
+ * Author:
+ *
  *********************************************************************/
 #include <hybrida_global_planner/planner_core.h>
 #include <pluginlib/class_list_macros.h>
 #include <tf/transform_listener.h>
 #include <costmap_2d/cost_values.h>
 #include <costmap_2d/costmap_2d.h>
-#include <costmap_2d/costmap_2d_publisher.h>
 
 #include <hybrida_global_planner/dijkstra.h>
 #include <hybrida_global_planner/astar.h>
@@ -49,11 +48,11 @@
 #include <hybrida_global_planner/quadratic_calculator.h>
 
 //register this planner as a BaseGlobalPlanner plugin
-PLUGINLIB_EXPORT_CLASS(global_planner::GlobalPlanner, nav_core::BaseGlobalPlanner)
+PLUGINLIB_EXPORT_CLASS(hybrid_astar_global_planner::HybridGlobalPlanner, nav_core::BaseGlobalPlanner)
 
-namespace global_planner {
+namespace hybrid_astar_global_planner {
 
-void GlobalPlanner::outlineMap(unsigned char* costarr, int nx, int ny, unsigned char value) {
+void HybridGlobalPlanner::outlineMap(unsigned char* costarr, int nx, int ny, unsigned char value) {
     unsigned char* pc = costarr;
     for (int i = 0; i < nx; i++)
         *pc++ = value;
@@ -68,37 +67,32 @@ void GlobalPlanner::outlineMap(unsigned char* costarr, int nx, int ny, unsigned 
         *pc = value;
 }
 
-GlobalPlanner::GlobalPlanner() :
+HybridGlobalPlanner::HybridGlobalPlanner() :
         costmap_(NULL), initialized_(false), allow_unknown_(true) {
 }
 
-GlobalPlanner::GlobalPlanner(std::string name, costmap_2d::Costmap2D* costmap, std::string frame_id) :
+HybridGlobalPlanner::HybridGlobalPlanner(std::string name, costmap_2d::Costmap2D* costmap, std::string frame_id) :
         costmap_(NULL), initialized_(false), allow_unknown_(true) {
     //initialize the planner
     initialize(name, costmap, frame_id);
 }
 
-GlobalPlanner::~GlobalPlanner() {
-    if (p_calc_)
-        delete p_calc_;
-    if (planner_)
-        delete planner_;
-    if (path_maker_)
-        delete path_maker_;
+HybridGlobalPlanner::~HybridGlobalPlanner() {
     if (dsrv_)
         delete dsrv_;
 }
 
-void GlobalPlanner::initialize(std::string name, costmap_2d::Costmap2DROS* costmap_ros) {
+void HybridGlobalPlanner::initialize(std::string name, costmap_2d::Costmap2DROS* costmap_ros) {
     initialize(name, costmap_ros->getCostmap(), costmap_ros->getGlobalFrameID());
 }
 
-void GlobalPlanner::initialize(std::string name, costmap_2d::Costmap2D* costmap, std::string frame_id) {
+void HybridGlobalPlanner::initialize(std::string name, costmap_2d::Costmap2D* costmap, std::string frame_id) {
+ROS_WARN("Init Hybrid!!!!!!!!!!!!");
     if (!initialized_) {
         ros::NodeHandle private_nh("~/" + name);
         costmap_ = costmap;
         frame_id_ = frame_id;
-
+/*
         if (cost_translation_table_ == NULL)
         {
             cost_translation_table_ = new char[256];
@@ -116,9 +110,7 @@ void GlobalPlanner::initialize(std::string name, costmap_2d::Costmap2D* costmap,
                 cost_translation_table_[ i ] = char(1 + (97 * (i - 1)) / 251);
             }
         }
-
-
-
+*/
 
         unsigned int cx = costmap->getSizeInCellsX(), cy = costmap->getSizeInCellsY();
 
@@ -128,9 +120,9 @@ void GlobalPlanner::initialize(std::string name, costmap_2d::Costmap2D* costmap,
         else
             convert_offset_ = 0.0;
 
-        planner_= new HybridAStar::Planner();
 
-        orientation_filter_ = new OrientationFilter();
+
+        //orientation_filter_ = new OrientationFilter();
 
         plan_pub_ = private_nh.advertise<nav_msgs::Path>("plan", 1);
         potential_pub_ = private_nh.advertise<nav_msgs::OccupancyGrid>("potential", 1);
@@ -148,11 +140,11 @@ void GlobalPlanner::initialize(std::string name, costmap_2d::Costmap2D* costmap,
         ros::NodeHandle prefix_nh;
         tf_prefix_ = tf::getPrefixParam(prefix_nh);
 
-        make_plan_srv_ = private_nh.advertiseService("make_plan", &GlobalPlanner::makePlanService, this);
+        make_plan_srv_ = private_nh.advertiseService("make_plan", &HybridGlobalPlanner::makePlanService, this);
 
-        dsrv_ = new dynamic_reconfigure::Server<global_planner::GlobalPlannerConfig>(ros::NodeHandle("~/" + name));
-        dynamic_reconfigure::Server<global_planner::GlobalPlannerConfig>::CallbackType cb = boost::bind(
-                &GlobalPlanner::reconfigureCB, this, _1, _2);
+        dsrv_ = new dynamic_reconfigure::Server<HybridGlobalPlannerConfig>(ros::NodeHandle("~/" + name));
+        dynamic_reconfigure::Server<HybridGlobalPlannerConfig>::CallbackType cb = boost::bind(
+                &HybridGlobalPlanner::reconfigureCB, this, _1, _2);
         dsrv_->setCallback(cb);
 
         initialized_ = true;
@@ -161,16 +153,16 @@ void GlobalPlanner::initialize(std::string name, costmap_2d::Costmap2D* costmap,
 
 }
 
-void GlobalPlanner::reconfigureCB(global_planner::GlobalPlannerConfig& config, uint32_t level) {
+void HybridGlobalPlanner::reconfigureCB(HybridGlobalPlannerConfig& config, uint32_t level) {
     //planner_->setLethalCost(config.lethal_cost);
-    path_maker_->setLethalCost(config.lethal_cost);
+    //path_maker_->setLethalCost(config.lethal_cost);
     //planner_->setNeutralCost(config.neutral_cost);
     //planner_->setFactor(config.cost_factor);
-    publish_potential_ = config.publish_potential;
-    orientation_filter_->setMode(config.orientation_mode);
+    //publish_potential_ = config.publish_potential;
+    //orientation_filter_->setMode(config.orientation_mode);
 }
 
-void GlobalPlanner::clearRobotCell(const tf::Stamped<tf::Pose>& global_pose, unsigned int mx, unsigned int my) {
+void HybridGlobalPlanner::clearRobotCell(const tf::Stamped<tf::Pose>& global_pose, unsigned int mx, unsigned int my) {
     if (!initialized_) {
         ROS_ERROR(
                 "This planner has not been initialized yet, but it is being used, please call initialize() before use");
@@ -181,7 +173,7 @@ void GlobalPlanner::clearRobotCell(const tf::Stamped<tf::Pose>& global_pose, uns
     costmap_->setCost(mx, my, costmap_2d::FREE_SPACE);
 }
 
-bool GlobalPlanner::makePlanService(nav_msgs::GetPlan::Request& req, nav_msgs::GetPlan::Response& resp) {
+bool HybridGlobalPlanner::makePlanService(nav_msgs::GetPlan::Request& req, nav_msgs::GetPlan::Response& resp) {
     makePlan(req.start, req.goal, resp.plan.poses);
 
     resp.plan.header.stamp = ros::Time::now();
@@ -190,12 +182,12 @@ bool GlobalPlanner::makePlanService(nav_msgs::GetPlan::Request& req, nav_msgs::G
     return true;
 }
 
-void GlobalPlanner::mapToWorld(double mx, double my, double& wx, double& wy) {
+void HybridGlobalPlanner::mapToWorld(double mx, double my, double& wx, double& wy) {
     wx = costmap_->getOriginX() + (mx+convert_offset_) * costmap_->getResolution();
     wy = costmap_->getOriginY() + (my+convert_offset_) * costmap_->getResolution();
 }
 
-bool GlobalPlanner::worldToMap(double wx, double wy, double& mx, double& my) {
+bool HybridGlobalPlanner::worldToMap(double wx, double wy, double& mx, double& my) {
     double origin_x = costmap_->getOriginX(), origin_y = costmap_->getOriginY();
     double resolution = costmap_->getResolution();
 
@@ -209,12 +201,12 @@ bool GlobalPlanner::worldToMap(double wx, double wy, double& mx, double& my) {
 
 }
 
-bool GlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, const geometry_msgs::PoseStamped& goal,
+bool HybridGlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, const geometry_msgs::PoseStamped& goal,
                            std::vector<geometry_msgs::PoseStamped>& plan) {
     return makePlan(start, goal, default_tolerance_, plan);
 }
 
-bool GlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, const geometry_msgs::PoseStamped& goal,
+bool HybridGlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, const geometry_msgs::PoseStamped& goal,
                            double tolerance, std::vector<geometry_msgs::PoseStamped>& plan) {
     boost::mutex::scoped_lock lock(mutex_);
     if (!initialized_) {
@@ -225,16 +217,29 @@ bool GlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, const geom
 
     //clear the plan, just in case
     plan.clear();
-    updateGrid();
+    //update the configuration space with the current map
+    configurationSpace.updateGrid(costmap_);
+    // prepare Voronoi
+    int height = costmap_->getSizeInCellsY();
+    int width = costmap_->getSizeInCellsX();
+    bool** binMap;
+    binMap = new bool*[width];
+
+    for (unsigned int x = 0; x < width; x++) { binMap[x] = new bool[height]; }
+
+    for (unsigned int x = 0; x < width; ++x) {
+        for (unsigned int y = 0; y < height; ++y) {
+            binMap[x][y] = costmap_->getCost(x,y)!=costmap_2d::FREE_SPACE;
+        }
+    }
+
+    voronoiDiagram.initializeMap(width, height, binMap);
+    voronoiDiagram.update();
+    //voronoiDiagram.visualize();
 
     ros::NodeHandle n;
     std::string global_frame = frame_id_;
 
-    planner_->setMap(grid_);
-    planner_->setStart(&start.pose);
-    planner_->setGoal(&goal.pose);
-    planner_->plan(plan);
-/*
     //until tf can handle transforming things that are way in the past... we'll require the goal to be in our global frame
     if (tf::resolve(tf_prefix_, goal.header.frame_id) != tf::resolve(tf_prefix_, global_frame)) {
         ROS_ERROR(
@@ -287,27 +292,80 @@ bool GlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, const geom
     clearRobotCell(start_pose, start_x_i, start_y_i);
 
     int nx = costmap_->getSizeInCellsX(), ny = costmap_->getSizeInCellsY();
-
+/*
     //make sure to resize the underlying array that Navfn uses
     p_calc_->setSize(nx, ny);
 
     path_maker_->setSize(nx, ny);
-
-    outlineMap(costmap_->getCharMap(), nx, ny, costmap_2d::LETHAL_OBSTACLE);
 */
+    outlineMap(costmap_->getCharMap(), nx, ny, costmap_2d::LETHAL_OBSTACLE);
     /*
     if(!old_navfn_behavior_)
         planner_->clearEndpoint(costmap_->getCharMap(), potential_array_, goal_x_i, goal_y_i, 2);
     if(publish_potential_)
         publishPotential(potential_array_);
     */
+// LISTS ALLOCATED ROW MAJOR ORDER
 
+    int depth = HybridAStar::Constants::headings;
+    int length = width * height * depth;
+    // define list pointers and initialize lists
+    auto * nodes3D = new HybridAStar::Node3D[length]();
+    auto * nodes2D = new HybridAStar::Node2D[width * height]();
+
+    // ________________________
+    // retrieving goal position
+    float x = goal.pose.position.x / HybridAStar::Constants::cellSize;
+    float y = goal.pose.position.y / HybridAStar::Constants::cellSize;
+    float t = tf::getYaw(goal.pose.orientation);
+    // set theta to a value (0,2PI]
+    t = HybridAStar::Helper::normalizeHeadingRad(t);
+    const HybridAStar::Node3D nGoal(x, y, t, 0, 0, nullptr);
+    // _________________________
+    // retrieving start position
+    x = start.pose.position.x / HybridAStar::Constants::cellSize;
+    y = start.pose.position.y / HybridAStar::Constants::cellSize;
+    t = tf::getYaw(start.pose.orientation);
+    // set theta to a value (0,2PI]
+    t = HybridAStar::Helper::normalizeHeadingRad(t);
+    HybridAStar::Node3D nStart(x, y, t, 0, 0, nullptr);
+
+
+    // CLEAR THE PATH
+    path.clear();
+    smoothedPath.clear();
+    // FIND THE PATH
+    HybridAStar::Node3D* nSolution = HybridAStar::Algorithm::hybridAStar(nStart, nGoal, nodes3D, nodes2D, width, height, configurationSpace, dubinsLookup, visualization);
+    // TRACE THE PATH
+    smoother.tracePath(nSolution);
+    // CREATE THE UPDATED PATH
+    //path.updatePath(smoother.getPath());
+    // SMOOTH THE PATH
+    smoother.smoothPath(voronoiDiagram);
+    // CREATE THE UPDATED PATH
+    smoothedPath.updatePath(smoother.getPath());
+
+    // _________________________________
+    // PUBLISH THE RESULTS OF THE SEARCH
+    //path.publishPath();
+    //path.publishPathNodes();
+    //path.publishPathVehicles();
+
+    //smoothedPath.publishPath();
+    //smoothedPath.publishPathNodes();
+    //smoothedPath.publishPathVehicles();
+
+    smoothedPath.dump(plan,frame_id_);
+
+    delete [] nodes3D;
+    delete [] nodes2D;
     //publish the plan for visualization purposes
+
     publishPlan(plan);
     return !plan.empty();
 }
 
-void GlobalPlanner::publishPlan(const std::vector<geometry_msgs::PoseStamped>& path) {
+void HybridGlobalPlanner::publishPlan(const std::vector<geometry_msgs::PoseStamped>& path) {
     if (!initialized_) {
         ROS_ERROR(
                 "This planner has not been initialized yet, but it is being used, please call initialize() before use");
@@ -329,7 +387,7 @@ void GlobalPlanner::publishPlan(const std::vector<geometry_msgs::PoseStamped>& p
     plan_pub_.publish(gui_path);
 }
 
-bool GlobalPlanner::getPlanFromPotential(double start_x, double start_y, double goal_x, double goal_y,
+bool HybridGlobalPlanner::getPlanFromPotential(double start_x, double start_y, double goal_x, double goal_y,
                                       const geometry_msgs::PoseStamped& goal,
                                        std::vector<geometry_msgs::PoseStamped>& plan) {
     if (!initialized_) {
@@ -369,8 +427,8 @@ bool GlobalPlanner::getPlanFromPotential(double start_x, double start_y, double 
     }
     return !plan.empty();
 }
-
-void GlobalPlanner::publishPotential(float* potential)
+/*
+void HybridGlobalPlanner::publishPotential(float* potential)
 {
     int nx = costmap_->getSizeInCellsX(), ny = costmap_->getSizeInCellsY();
     double resolution = costmap_->getResolution();
@@ -410,7 +468,8 @@ void GlobalPlanner::publishPotential(float* potential)
     }
     potential_pub_.publish(grid);
 }
-    void GlobalPlanner::updateGrid() {
+
+    void HybridGlobalPlanner::updateGrid() {
         boost::unique_lock<costmap_2d::Costmap2D::mutex_t> lock(*(costmap_->getMutex()));
         double resolution = costmap_->getResolution();
 
@@ -437,6 +496,7 @@ void GlobalPlanner::publishPotential(float* potential)
         {
             grid_->data[i] = cost_translation_table_[ data[ i ]];
         }
-    }
-} //end namespace global_planner
+        
+    }*/
+} //end namespace hybrid_astar_global_planner
 

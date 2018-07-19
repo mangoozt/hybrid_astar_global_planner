@@ -71,7 +71,7 @@ class Path {
   void publishPathNodes() { pubPathNodes.publish(pathNodes); }
   /// Publishes the vehicle along the path
   void publishPathVehicles() { pubPathVehicles.publish(pathVehicles); }
-  void dump(std::vector<geometry_msgs::PoseStamped>& plan);
+  void dump(std::vector<geometry_msgs::PoseStamped>& plan,std::string frame_id_);
  private:
   /// A handle to the ROS node
   ros::NodeHandle n;

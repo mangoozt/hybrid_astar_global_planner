@@ -97,6 +97,8 @@ class Node3D {
   // CONSTANT VALUES
   /// Number of possible directions
   static const int dir;
+  static const float R;
+  static const float s;
   /// Possible movements in the x direction
   static const float dx[];
   /// Possible movements in the y direction

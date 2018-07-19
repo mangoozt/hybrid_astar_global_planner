@@ -58,13 +58,13 @@ static const bool twoD = true;
 /// [#] --- Limits the maximum search depth of the algorithm, possibly terminating without the solution
 static const int iterations = 30000;
 /// [m] --- Uniformly adds a padding around the vehicle
-static const double bloating = 0;
+static const double bloating = 2;
 /// [m] --- The width of the vehicle
-static const double width = 10 + 2 * bloating;
+static const double width = 20 + 2 * bloating;
 /// [m] --- The length of the vehicle
-static const double length = 15 + 2 * bloating;
+static const double length = 30 + 2 * bloating;
 /// [m] --- The minimum turning radius of the vehicle
-static const float r = 10;
+static const float r = 300;
 /// [m] --- The number of discretizations in heading
 static const int headings = 72;
 /// [°] --- The discretization value of the heading (goal condition)

@@ -188,11 +188,38 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Path to a library.
+OMPLAPP_LIBRARY:FILEPATH=OMPLAPP_LIBRARY-NOTFOUND
+
+//Path to a file.
+OMPL_CONFIG:FILEPATH=/usr/include/ompl/config.h
+
+//The directory containing a CMake configuration file for OMPL.
+OMPL_DIR:PATH=/usr/share/ompl
+
+//Path to a file.
+OMPL_INCLUDE_DIRS:PATH=/usr/include/ompl/base
+
+//Path to OMPL library
+OMPL_LIBRARIES:FILEPATH=/usr/lib/x86_64-linux-gnu/libompl.so
+
+//Path to a library.
+OMPL_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libompl.so
+
 //Path to a program.
 ProcessorCount_cmd_getconf:FILEPATH=/usr/bin/getconf
 
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/sbin/sysctl
+
+//The directory containing a CMake configuration file for catkin.
+catkin_DIR:PATH=catkin_DIR-NOTFOUND
+
+//Value Computed by CMake
+global_planner_BINARY_DIR:STATIC=/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug
+
+//Value Computed by CMake
+global_planner_SOURCE_DIR:STATIC=/home/mark/catkin_ws/src/hybrid_astar_global_planner
 
 //Value Computed by CMake
 hybrid_astar_global_planner_BINARY_DIR:STATIC=/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug
@@ -348,6 +375,12 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Test COMPILER_SUPPORTS_CXX0X
+COMPILER_SUPPORTS_CXX0X:INTERNAL=1
+//Test COMPILER_SUPPORTS_CXX11
+COMPILER_SUPPORTS_CXX11:INTERNAL=1
+//Details about finding OMPL
+FIND_PACKAGE_MESSAGE_DETAILS_OMPL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libompl.so][/usr/include][v()]
 //ADVANCED property for variable: ProcessorCount_cmd_getconf
 ProcessorCount_cmd_getconf-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl

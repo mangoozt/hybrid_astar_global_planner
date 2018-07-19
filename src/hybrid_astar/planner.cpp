@@ -43,10 +43,6 @@ void Planner::initializeLookups() {
 //                                                MAP
 //###################################################
 void Planner::setMap(const nav_msgs::OccupancyGrid::Ptr map) {
-  if (Constants::coutDEBUG) {
-    std::cout << "I am seeing the map..." << std::endl;
-  }
-
   grid = map;
   //update the configuration space with the current map
   configurationSpace.updateGrid(map);
@@ -170,12 +166,7 @@ void Planner::plan(std::vector<geometry_msgs::PoseStamped>& plan_) {
     // set theta to a value (0,2PI]
     t = Helper::normalizeHeadingRad(t);
     const Node3D nGoal(x, y, t, 0, 0, nullptr);
-    // __________
-    // DEBUG GOAL
-    //    const Node3D nGoal(155.349, 36.1969, 0.7615936, 0, 0, nullptr);
-
-
-    // _________________________
+        // _________________________
     // retrieving start position
     x = start.pose.pose.position.x / Constants::cellSize;
     y = start.pose.pose.position.y / Constants::cellSize;

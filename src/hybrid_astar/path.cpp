@@ -8,15 +8,15 @@ using namespace HybridAStar;
 //###################################################
 
 void Path::clear() {
-  Node3D node;
+//  Node3D node;
   path.poses.clear();
   pathNodes.markers.clear();
   pathVehicles.markers.clear();
-  addNode(node, 0);
-  addVehicle(node, 1);
-  publishPath();
-  publishPathNodes();
-  publishPathVehicles();
+//  addNode(node, 0);
+//  addVehicle(node, 1);
+//  publishPath();
+//  publishPathNodes();
+//  publishPathVehicles();
 }
 
 ////###################################################
@@ -139,9 +139,26 @@ void Path::addVehicle(const Node3D& node, int i) {
   pathVehicle.pose.orientation = tf::createQuaternionMsgFromYaw(node.getT());
   pathVehicles.markers.push_back(pathVehicle);
 }
-void Path::dump(std::vector<geometry_msgs::PoseStamped>& plan){
+void Path::dump(std::vector<geometry_msgs::PoseStamped>& plan,std::string frame_id_){
     plan.clear();
-    for (int i = 0; i < path.poses.size(); ++i) {
-        plan.push_back(path.poses[i]);
+    for (auto &i : path.poses) {
+      //for (int i = path.size() -1; i>=0; i--) {
+        //std::pair<float, float> point = path[i];
+        //convert the plan to world coordinates
+        //double world_x, world_y;
+        //mapToWorld(point.first, point.second, world_x, world_y);
+
+        geometry_msgs::PoseStamped pose;
+        pose.header.stamp = i.header.stamp;
+        pose.header.frame_id = frame_id_;
+        pose.pose= i.pose;
+        //pose.pose.position.x = path.poses[i].pose.position.x;
+        //pose.pose.position.y = world_y;
+        //pose.pose.position.z = 0.0;
+        //pose.pose.orientation.x = 0.0;
+        //pose.pose.orientation.y = 0.0;
+        //pose.pose.orientation.z = 0.0;
+        //pose.pose.orientation.w = 1.0;
+        plan.push_back(pose);
     }
 }
