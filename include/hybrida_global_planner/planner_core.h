@@ -228,7 +228,7 @@ namespace hybrid_astar_global_planner {
         /// The collission detection for testing specific configurations
         HybridAStar::CollisionDetection configurationSpace;
         /// A lookup table for configurations of the vehicle and their spatial occupancy enumeration
-        HybridAStar::Constants::config collisionLookup[HybridAStar::Constants::headings * HybridAStar::Constants::positions];
+        HybridAStar::Constants::configuration collisionLookup[HybridAStar::Constants::headings * HybridAStar::Constants::positions];
         /// A lookup of analytical solutions (Dubin's paths)
         float* dubinsLookup = new float [HybridAStar::Constants::headings * HybridAStar::Constants::headings * HybridAStar::Constants::dubinsWidth * HybridAStar::Constants::dubinsWidth];
         /// The visualization used for search visualization

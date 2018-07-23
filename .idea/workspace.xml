@@ -13,22 +13,17 @@
   <component name="ChangeListManager">
     <list default="true" id="8785ffdf-7015-4a6e-a2e8-876c83809aed" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bgp_plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bgp_plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cfg/GlobalPlanner.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/cfg/GlobalPlanner.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/hybrid_astar/collisiondetection.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/hybrid_astar/collisiondetection.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/hybrid_astar/constants.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/hybrid_astar/constants.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/hybrid_astar/node3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/hybrid_astar/node3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/hybrid_astar/path.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/hybrid_astar/path.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/hybrid_astar/lookup.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/hybrid_astar/lookup.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/hybrid_astar/planner.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/hybrid_astar/planner.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/hybrid_astar/visualize.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/hybrid_astar/visualize.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/hybrida_global_planner/planner_core.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/hybrida_global_planner/planner_core.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/package.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hybrid_astar/algorithm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/hybrid_astar/algorithm.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hybrid_astar/collisiondetection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/hybrid_astar/collisiondetection.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hybrid_astar/node3d.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/hybrid_astar/node3d.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hybrid_astar/path.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/hybrid_astar/path.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hybrid_astar/planner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/hybrid_astar/planner.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hybrid_astar/visualize.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/hybrid_astar/visualize.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/planner_core.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/planner_core.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -45,62 +40,8 @@
       <file leaf-file-name="algorithm.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/hybrid_astar/algorithm.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6285">
-              <caret line="419" column="31" selection-start-line="419" selection-start-column="31" selection-end-line="419" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dubins.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/hybrid_astar/dubins.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3465">
-              <caret line="231" column="7" selection-start-line="231" selection-start-column="7" selection-end-line="231" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="collisiondetection.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/hybrid_astar/collisiondetection.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="path.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/hybrid_astar/path.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2235">
-              <caret line="149" selection-start-line="149" selection-end-line="149" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="path.h" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/include/hybrid_astar/path.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="85" column="19" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1050">
-              <caret line="70" column="27" selection-start-line="70" selection-start-column="27" selection-end-line="70" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+            <state relative-caret-position="85">
+              <caret line="151" column="39" lean-forward="true" selection-start-line="151" selection-start-column="39" selection-end-line="151" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -108,23 +49,80 @@
       <file leaf-file-name="collisiondetection.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/hybrid_astar/collisiondetection.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="57" selection-start-line="57" selection-end-line="57" />
+            <state relative-caret-position="75">
+              <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
               <folding>
-                <element signature="e#59#94#0" expanded="true" />
+                <element signature="e#1024#1036#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="planner_core.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="collisiondetection.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/hybrid_astar/collisiondetection.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lookup.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/hybrid_astar/lookup.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="61">
+              <caret line="146" column="8" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
+              <folding>
+                <element signature="e#49#68#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="constants.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/hybrid_astar/constants.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="130" column="7" selection-start-line="130" selection-start-column="7" selection-end-line="130" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="node3d.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/hybrid_astar/node3d.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-285">
+              <caret line="50" column="7" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="planner_core.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/planner_core.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5355">
-              <caret line="357" column="38" selection-start-line="357" selection-start-column="38" selection-end-line="357" selection-end-column="38" />
+            <state relative-caret-position="106">
+              <caret line="348" column="30" lean-forward="true" selection-start-line="348" selection-start-column="30" selection-end-line="348" selection-end-column="30" />
               <folding>
                 <element signature="e#1830#1878#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="smoother.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/hybrid_astar/smoother.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-130">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="smoother.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/hybrid_astar/smoother.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="37" column="10" lean-forward="true" selection-start-line="37" selection-start-column="10" selection-end-line="37" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -144,6 +142,8 @@
       <find>configurationSpace</find>
       <find>omp</find>
       <find>ompl</find>
+      <find>stamp</find>
+      <find>visua</find>
     </findStrings>
     <replaceStrings>
       <replace>HybridGlobalPlanner</replace>
@@ -160,29 +160,30 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/hybrid_astar/algorithm.cpp" />
         <option value="$PROJECT_DIR$/src/hybrid_astar/bucketedqueue.cpp" />
         <option value="$PROJECT_DIR$/src/hybrid_astar/dubins.cpp" />
         <option value="$PROJECT_DIR$/src/hybrid_astar/dynamicvoronoi.cpp" />
         <option value="$PROJECT_DIR$/src/hybrid_astar/node2d.cpp" />
-        <option value="$PROJECT_DIR$/src/hybrid_astar/node3d.cpp" />
         <option value="$PROJECT_DIR$/src/hybrid_astar/smoother.cpp" />
-        <option value="$PROJECT_DIR$/src/hybrid_astar/visualize.cpp" />
         <option value="$PROJECT_DIR$/include/hybrid_astar/planner.h" />
         <option value="$PROJECT_DIR$/src/hybrid_astar/planner.cpp" />
-        <option value="$PROJECT_DIR$/include/hybrid_astar/constants.h" />
         <option value="$PROJECT_DIR$/cfg/GlobalPlanner.cfg" />
         <option value="$PROJECT_DIR$/bgp_plugin.xml" />
         <option value="$PROJECT_DIR$/launch/robot_carlike_in_stage_hybrid.launch" />
-        <option value="$PROJECT_DIR$/include/hybrid_astar/lookup.h" />
         <option value="$PROJECT_DIR$/include/hybrida_global_planner/planner_core.h" />
-        <option value="$PROJECT_DIR$/src/hybrid_astar/collisiondetection.cpp" />
-        <option value="$PROJECT_DIR$/include/hybrid_astar/collisiondetection.h" />
         <option value="$PROJECT_DIR$/package.xml" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/src/planner_core.cpp" />
-        <option value="$PROJECT_DIR$/src/hybrid_astar/path.cpp" />
         <option value="$PROJECT_DIR$/include/hybrid_astar/path.h" />
+        <option value="$PROJECT_DIR$/src/hybrid_astar/path.cpp" />
+        <option value="$PROJECT_DIR$/include/hybrid_astar/visualize.h" />
+        <option value="$PROJECT_DIR$/src/hybrid_astar/visualize.cpp" />
+        <option value="$PROJECT_DIR$/src/hybrid_astar/node3d.cpp" />
+        <option value="$PROJECT_DIR$/include/hybrid_astar/constants.h" />
+        <option value="$PROJECT_DIR$/include/hybrid_astar/lookup.h" />
+        <option value="$PROJECT_DIR$/src/hybrid_astar/algorithm.cpp" />
+        <option value="$PROJECT_DIR$/src/hybrid_astar/collisiondetection.cpp" />
+        <option value="$PROJECT_DIR$/include/hybrid_astar/collisiondetection.h" />
+        <option value="$PROJECT_DIR$/src/planner_core.cpp" />
       </list>
     </option>
   </component>
@@ -306,11 +307,14 @@
       <workItem from="1531819594335" duration="3457000" />
       <workItem from="1531948398323" duration="691000" />
       <workItem from="1531950458544" duration="474000" />
+      <workItem from="1531987525048" duration="3545000" />
+      <workItem from="1531991794884" duration="13752000" />
+      <workItem from="1532081439356" duration="25698000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61228000" />
+    <option name="totallyTimeSpent" value="104223000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
@@ -374,20 +378,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/path.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="77" column="11" selection-start-line="77" selection-start-column="11" selection-end-line="77" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/smoother.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/hybrid_astar/planner.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1200">
@@ -434,38 +424,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/algorithm.cpp" />
-    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/bucketedqueue.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-345">
-          <caret line="4" column="19" lean-forward="true" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/hybrid_astar/node2d.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="23" selection-start-column="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/node3d.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" selection-start-column="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/smoother.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" selection-start-column="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/visualize.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="53" lean-forward="true" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -490,13 +452,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/smoother.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gradient_path.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-330">
@@ -514,13 +469,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///opt/ros/kinetic/include/costmap_2d/costmap_2d.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1290">
-          <caret line="59" column="6" selection-start-line="59" selection-start-column="6" selection-end-line="59" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///opt/ros/kinetic/include/costmap_2d/costmap_2d_publisher.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-325">
@@ -532,13 +480,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="154" column="21" selection-start-line="154" selection-start-column="21" selection-end-line="154" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/visualize.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="27" column="2" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -556,13 +497,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/dynamicvoronoi.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/hybrid_astar/bucketedqueue.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -577,20 +511,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="78" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/lookup.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2901">
-          <caret line="79" column="41" lean-forward="true" selection-start-line="79" selection-start-column="41" selection-end-line="79" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/constants.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="134" column="20" lean-forward="true" selection-start-line="134" selection-start-column="20" selection-end-line="134" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -630,24 +550,10 @@
       </provider>
     </entry>
     <entry file="file:///opt/ros/kinetic/include/ompl/base/spaces/SE2StateSpace.h" />
-    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/algorithm.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/hybrid_astar/dubins.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3465">
           <caret line="231" column="7" selection-start-line="231" selection-start-column="7" selection-end-line="231" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/algorithm.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6285">
-          <caret line="419" column="31" selection-start-line="419" selection-start-column="31" selection-end-line="419" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -658,30 +564,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/collisiondetection.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/collisiondetection.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-          <folding>
-            <element signature="e#59#94#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/hybrida_global_planner/planner_core.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="180" column="8" selection-start-line="180" selection-start-column="8" selection-end-line="180" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -689,27 +571,155 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/planner_core.cpp">
+    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/path.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5355">
-          <caret line="357" column="38" selection-start-line="357" selection-start-column="38" selection-end-line="357" selection-end-column="38" />
-          <folding>
-            <element signature="e#1830#1878#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="167">
+          <caret line="86" column="1" selection-start-line="86" selection-start-column="1" selection-end-line="86" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/helper.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/bucketedqueue.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1200">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/dynamicvoronoi.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="100" column="12" lean-forward="true" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/hybrid_astar/path.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2235">
-          <caret line="149" selection-start-line="149" selection-end-line="149" />
+        <state relative-caret-position="1575">
+          <caret line="105" column="37" selection-start-line="105" selection-start-column="37" selection-end-line="105" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/path.h">
+    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/algorithm.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="85" column="19" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
+        <state relative-caret-position="-74">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/visualize.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3945">
+          <caret line="263" column="42" selection-start-line="263" selection-start-column="42" selection-end-line="263" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/visualize.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="44" column="25" selection-start-line="44" selection-start-column="25" selection-end-line="44" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/hybrida_global_planner/planner_core.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2700">
+          <caret line="180" column="20" selection-start-line="180" selection-start-column="20" selection-end-line="180" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/constants.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="130" column="7" selection-start-line="130" selection-start-column="7" selection-end-line="130" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/algorithm.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="151" column="39" lean-forward="true" selection-start-line="151" selection-start-column="39" selection-end-line="151" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///opt/ros/kinetic/include/costmap_2d/costmap_2d.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3885">
+          <caret line="191" column="15" lean-forward="true" selection-start-line="191" selection-start-column="15" selection-end-line="191" selection-end-column="15" />
+          <folding>
+            <element signature="e#1941#1958#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/node3d.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="35" column="98" selection-start-line="35" selection-start-column="98" selection-end-line="35" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/node3d.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-285">
+          <caret line="50" column="7" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/lookup.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="146" column="8" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
+          <folding>
+            <element signature="e#49#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/collisiondetection.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+          <folding>
+            <element signature="e#1024#1036#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/collisiondetection.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/hybrid_astar/smoother.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="37" column="10" lean-forward="true" selection-start-line="37" selection-start-column="10" selection-end-line="37" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hybrid_astar/smoother.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-130">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/planner_core.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="348" column="30" lean-forward="true" selection-start-line="348" selection-start-column="30" selection-end-line="348" selection-end-column="30" />
+          <folding>
+            <element signature="e#1830#1878#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

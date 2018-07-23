@@ -34,7 +34,7 @@ static const bool coutDEBUG = false;
 /// A flag for the mode (true = manual; false = dynamic). Manual for static map or dynamic for dynamic map.
 static const bool manual = false;
 /// A flag for the visualization of 3D nodes (true = on; false = off)
-static const bool visualization = 1 * manual;
+static const bool visualization = true;
 /// A flag for the visualization of 2D nodes (true = on; false = off)
 static const bool visualization2D = 1 * manual;
 /// A flag to toggle reversing (true = on; false = off)
@@ -58,13 +58,13 @@ static const bool twoD = true;
 /// [#] --- Limits the maximum search depth of the algorithm, possibly terminating without the solution
 static const int iterations = 30000;
 /// [m] --- Uniformly adds a padding around the vehicle
-static const double bloating = 2;
+static const double bloating = 0;
 /// [m] --- The width of the vehicle
-static const double width = 20 + 2 * bloating;
+static const double width = 0.25 + 2 * bloating;
 /// [m] --- The length of the vehicle
-static const double length = 30 + 2 * bloating;
+static const double length = 0.6 + 2 * bloating;
 /// [m] --- The minimum turning radius of the vehicle
-static const float r = 300;
+static const float r = 1;
 /// [m] --- The number of discretizations in heading
 static const int headings = 72;
 /// [°] --- The discretization value of the heading (goal condition)
@@ -74,7 +74,7 @@ static const float deltaHeadingRad = 2 * M_PI / (float)headings;
 /// [c*M_PI] --- The heading part of the goal condition
 static const float deltaHeadingNegRad = 2 * M_PI - deltaHeadingRad;
 /// [m] --- The cell size of the 2D grid of the world
-static const float cellSize = 1;
+static const float cellSize = 0.05;
 /*!
   \brief [m] --- The tie breaker breaks ties between nodes expanded in the same cell
 
@@ -99,7 +99,7 @@ static const float penaltyCOD = 2.0;
 /// [m] --- The distance to the goal when the analytical solution (Dubin's shot) first triggers
 static const float dubinsShotDistance = 100;
 /// [m] --- The step size for the analytical solution (Dubin's shot) primarily relevant for collision checking
-static const float dubinsStepSize = 1;
+static const float dubinsStepSize = 0.1;
 
 
 // ______________________
@@ -115,9 +115,9 @@ static const int dubinsArea = dubinsWidth * dubinsWidth;
 // COLLISION LOOKUP SPECIFIC
 
 /// [m] -- The bounding box size length and width to precompute all possible headings
-static const int bbSize = std::ceil((sqrt(width * width + length* length) + 4) / cellSize);
+static const int bbSize = std::ceil((sqrt(width * width + length* length) + 0.1) / cellSize);
 /// [#] --- The sqrt of the number of discrete positions per cell
-static const int positionResolution = 10;
+static const int positionResolution = 1;
 /// [#] --- The number of discrete positions per cell
 static const int positions = positionResolution * positionResolution;
 /// A structure describing the relative position of the occupied cell based on the center of the vehicle
@@ -128,7 +128,7 @@ struct relPos {
   int y;
 };
 /// A structure capturing the lookup for each theta configuration
-struct config {
+struct configuration {
   /// the number of cells occupied by this configuration of the vehicle
   int length;
   /*!
@@ -142,7 +142,7 @@ struct config {
 // _________________
 // SMOOTHER SPECIFIC
 /// [m] --- The minimum width of a safe road for the vehicle at hand
-static const float minRoadWidth = 2;
+static const float minRoadWidth = 0.5;
 
 // ____________________________________________
 // COLOR DEFINITIONS FOR VISUALIZATION PURPOSES

@@ -45,12 +45,12 @@ bool CollisionDetection::configurationTest(float x, float y, float t) {
     cY = (Y + collisionLookup[idx].pos[i].y);
 
     // make sure the configuration coordinates are actually on the grid
-    if (cX >= 0 && (unsigned int)cX < grid->getSizeInCellsX() && cY >= 0 && (unsigned int)cY < grid->getSizeInCellsY()) {
-      if (grid->getCharMap()[cY * grid->getSizeInCellsX() + cX]) {
+    if (cX >= 0 && (unsigned int)cX < grid->getSizeInMetersX() && cY >= 0 && (unsigned int)cY < grid->getSizeInMetersY()) {
+      if (grid->getCharMap()[cY * grid->getSizeInCellsX() + cX]==costmap_2d::FREE_SPACE) {
         return false;
       }
     }
   }
 
-  return true;
+    return true;
 }

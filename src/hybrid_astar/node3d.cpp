@@ -10,8 +10,8 @@ const int Node3D::dir = 3;
 //const float Node3D::dx[] = { 0.62832,   0.62717,   0.62717};
 //const float Node3D::dt[] = { 0,         0.10472,   -0.10472};
 
-const float Node3D::R = 15;
-const float Node3D::s = 3.1415926535897*6/180;
+const float Node3D::R = 0.5;
+const float Node3D::s = 3.1415926535897*5/180;
 const float Node3D::dy[] = { 0,        -Node3D::R*(1-cos(Node3D::s)),  Node3D::R*(1-cos(Node3D::s))};
 const float Node3D::dx[] = { Node3D::R*Node3D::s,   Node3D::R*sin(Node3D::s),   Node3D::R*sin(Node3D::s)};
 const float Node3D::dt[] = { 0,         Node3D::s,   -Node3D::s};
@@ -33,7 +33,7 @@ const float Node3D::dt[] = { 0,         Node3D::s,   -Node3D::s};
 //                                         IS ON GRID
 //###################################################
 bool Node3D::isOnGrid(const int width, const int height) const {
-  return x >= 0 && x < width && y >= 0 && y < height && (int)(t / Constants::deltaHeadingRad) >= 0 && (int)(t / Constants::deltaHeadingRad) < Constants::headings;
+  return x >= 0 && x < width*Constants::cellSize && y >= 0 && y < height*width*Constants::cellSize && (int)(t / Constants::deltaHeadingRad) >= 0 && (int)(t / Constants::deltaHeadingRad) < Constants::headings;
 }
 
 
@@ -214,7 +214,7 @@ void Node3D::updateG() {
 ////###################################################
 ////                                 COLLISION CHECKING
 ////###################################################
-//bool Node3D::isTraversable(const nav_msgs::OccupancyGrid::ConstPtr& grid, Constants::config* collisionLookup) const {
+//bool Node3D::isTraversable(const nav_msgs::OccupancyGrid::ConstPtr& grid, Constants::configuration* collisionLookup) const {
 //  int X = (int)x;
 //  int Y = (int)y;
 //  int iX = (int)((x - (long)x) * Constants::positionResolution);
@@ -245,7 +245,7 @@ void Node3D::updateG() {
 ////###################################################
 ////                                        DUBINS SHOT
 ////###################################################
-//Node3D* Node3D::dubinsShot(const Node3D& goal, const nav_msgs::OccupancyGrid::ConstPtr& grid, Constants::config* collisionLookup) const {
+//Node3D* Node3D::dubinsShot(const Node3D& goal, const nav_msgs::OccupancyGrid::ConstPtr& grid, Constants::configuration* collisionLookup) const {
 //  // start
 //  double q0[] = { x, y, t };
 //  // goal

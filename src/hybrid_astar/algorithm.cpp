@@ -37,7 +37,15 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
                                CollisionDetection& configurationSpace,
                                float* dubinsLookup,
                                Visualize& visualization) {
+  std::cout << "\nhybridAStar\n";
+  std::cout << "\nStart\n";
+  std::cout << "\nX "<<start.getX()<<"\n";
+  std::cout << "\ny "<<start.getY()<<"\n";
+  std::cout << "\nt "<<start.getT()<<"\n";
 
+  std::cout << "\nX "<<goal.getX()<<"\n";
+  std::cout << "\ny "<<goal.getY()<<"\n";
+  std::cout << "\nt "<<goal.getT()<<"\n";
   // PREDECESSOR AND SUCCESSOR INDEX
   int iPred, iSucc;
   float newG;
@@ -72,56 +80,7 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
 
   // continue until O empty
   while (!O.empty()) {
-
-    //    // DEBUG
-    //    Node3D* pre = nullptr;
-    //    Node3D* succ = nullptr;
-
-    //    std::cout << "\t--->>>" << std::endl;
-
-    //    for (priorityQueue::ordered_iterator it = O.ordered_begin(); it != O.ordered_end(); ++it) {
-    //      succ = (*it);
-    //      std::cout << "VAL"
-    //                << " | C:" << succ->getC()
-    //                << " | x:" << succ->getX()
-    //                << " | y:" << succ->getY()
-    //                << " | t:" << helper::toDeg(succ->getT())
-    //                << " | i:" << succ->getIdx()
-    //                << " | O:" << succ->isOpen()
-    //                << " | pred:" << succ->getPred()
-    //                << std::endl;
-
-    //      if (pre != nullptr) {
-
-    //        if (pre->getC() > succ->getC()) {
-    //          std::cout << "PRE"
-    //                    << " | C:" << pre->getC()
-    //                    << " | x:" << pre->getX()
-    //                    << " | y:" << pre->getY()
-    //                    << " | t:" << helper::toDeg(pre->getT())
-    //                    << " | i:" << pre->getIdx()
-    //                    << " | O:" << pre->isOpen()
-    //                    << " | pred:" << pre->getPred()
-    //                    << std::endl;
-    //          std::cout << "SCC"
-    //                    << " | C:" << succ->getC()
-    //                    << " | x:" << succ->getX()
-    //                    << " | y:" << succ->getY()
-    //                    << " | t:" << helper::toDeg(succ->getT())
-    //                    << " | i:" << succ->getIdx()
-    //                    << " | O:" << succ->isOpen()
-    //                    << " | pred:" << succ->getPred()
-    //                    << std::endl;
-
-    //          if (pre->getC() - succ->getC() > max) {
-    //            max = pre->getC() - succ->getC();
-    //          }
-    //        }
-    //      }
-
-    //      pre = succ;
-    //    }
-
+    std::cout << "\nO.top()\n";
     // pop node with lowest cost from priority queue
     nPred = O.top();
     // set index
@@ -134,7 +93,9 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
       visualization.publishNode3DPose(*nPred);
       d.sleep();
     }
-
+    std::cout << "\nX "<<nPred->getX()<<"\n";
+    std::cout << "\ny "<<nPred->getY()<<"\n";
+    std::cout << "\nt "<<nPred->getT()<<"\n";
     // _____________________________
     // LAZY DELETION of rewired node
     // if there exists a pointer this node has already been expanded
@@ -146,6 +107,7 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
     // _________________
     // EXPANSION OF NODE
     else if (nodes3D[iPred].isOpen()) {
+      std::cout << "\nEXpansion\n";
       // add node to closed list
       nodes3D[iPred].close();
       // remove node from open list
@@ -176,29 +138,38 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
         // ______________________________
         // SEARCH WITH FORWARD SIMULATION
         for (int i = 0; i < dir; i++) {
+          std::cout << "\ncreateSuccesor #"<<i<<"\n";
           // create possible successor
           nSucc = nPred->createSuccessor(i);
+          std::cout << "\nX "<<nSucc->getX()<<"\n";
+          std::cout << "\ny "<<nSucc->getY()<<"\n";
+          std::cout << "\nt "<<nSucc->getT()<<"\n";
           // set index of the successor
           iSucc = nSucc->setIdx(width, height);
 
           // ensure successor is on grid and traversable
+          if (nSucc->isOnGrid(width, height)) std::cout << "\non grid"<<i<<"\n";
+          if(configurationSpace.isTraversable(nSucc)) std::cout << "\ntraversable"<<i<<"\n";
           if (nSucc->isOnGrid(width, height) && configurationSpace.isTraversable(nSucc)) {
-
+            std::cout << "\non grid&traversable"<<i<<"\n";
             // ensure successor is not on closed list or it has the same index as the predecessor
             if (!nodes3D[iSucc].isClosed() || iPred == iSucc) {
-
+              std::cout << "\nnot on closed list"<<i<<"\n";
               // calculate new G value
               nSucc->updateG();
               newG = nSucc->getG();
 
               // if successor not on open list or found a shorter way to the cell
               if (!nodes3D[iSucc].isOpen() || newG < nodes3D[iSucc].getG() || iPred == iSucc) {
+                std::cout << "\nnot on open list"<<i<<"\n";
 
                 // calculate H value
                 updateH(*nSucc, goal, nodes2D, dubinsLookup, width, height, configurationSpace, visualization);
 
                 // if the successor is in the same cell but the C value is larger
                 if (iPred == iSucc && nSucc->getC() > nPred->getC() + Constants::tieBreaker) {
+                  std::cout << "\nthe successor is in the same cell but the C value is larger"<<i<<"\n";
+
                   delete nSucc;
                   continue;
                 }
@@ -212,6 +183,7 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
                 }
 
                 // put successor on open list
+                std::cout << "\nput successor on open list"<<i<<"\n";
                 nSucc->open();
                 nodes3D[iSucc] = *nSucc;
                 O.push(&nodes3D[iSucc]);

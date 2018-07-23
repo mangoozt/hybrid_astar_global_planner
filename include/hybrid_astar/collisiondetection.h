@@ -3,6 +3,7 @@
 
 #include <nav_msgs/OccupancyGrid.h>
 #include <costmap_2d/costmap_2d.h>
+#include <costmap_2d/cost_values.h>
 
 #include "constants.h"
 #include "lookup.h"
@@ -89,7 +90,7 @@ class CollisionDetection {
   */
   void updateGrid(costmap_2d::Costmap2D* map) {grid = map;}
     /// The collision lookup table
-    Constants::config collisionLookup[Constants::headings * Constants::positions];
+    Constants::configuration collisionLookup[Constants::headings * Constants::positions];
  private:
   /// The occupancy grid
   costmap_2d::Costmap2D* grid;

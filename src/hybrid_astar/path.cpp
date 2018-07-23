@@ -66,10 +66,11 @@ void Path::addSegment(const Node3D& node) {
   vertex.pose.position.x = node.getX() * Constants::cellSize;
   vertex.pose.position.y = node.getY() * Constants::cellSize;
   vertex.pose.position.z = 0;
-  vertex.pose.orientation.x = 0;
-  vertex.pose.orientation.y = 0;
-  vertex.pose.orientation.z = 0;
-  vertex.pose.orientation.w = 0;
+  vertex.pose.orientation = tf::createQuaternionMsgFromYaw(node.getT());
+//  vertex.pose.orientation.x = 0;
+//  vertex.pose.orientation.y = 0;
+//  vertex.pose.orientation.z = 0;
+//  vertex.pose.orientation.w = 0;
   path.poses.push_back(vertex);
 }
 
@@ -84,7 +85,7 @@ void Path::addNode(const Node3D& node, int i) {
   }
 
   pathNode.header.frame_id = "path";
-  pathNode.header.stamp = ros::Time(0);
+  pathNode.header.stamp = ros::Time::now();;
   pathNode.id = i;
   pathNode.type = visualization_msgs::Marker::SPHERE;
   pathNode.scale.x = 0.1;
@@ -104,6 +105,7 @@ void Path::addNode(const Node3D& node, int i) {
 
   pathNode.pose.position.x = node.getX() * Constants::cellSize;
   pathNode.pose.position.y = node.getY() * Constants::cellSize;
+  pathNode.pose.orientation = tf::createQuaternionMsgFromYaw(node.getT());
   pathNodes.markers.push_back(pathNode);
 }
 
@@ -116,7 +118,7 @@ void Path::addVehicle(const Node3D& node, int i) {
   }
 
   pathVehicle.header.frame_id = "path";
-  pathVehicle.header.stamp = ros::Time(0);
+  pathVehicle.header.stamp = ros::Time::now();
   pathVehicle.id = i;
   pathVehicle.type = visualization_msgs::Marker::CUBE;
   pathVehicle.scale.x = Constants::length - Constants::bloating * 2;

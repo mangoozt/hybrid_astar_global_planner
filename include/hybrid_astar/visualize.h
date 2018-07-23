@@ -41,7 +41,13 @@ class Visualize {
     poses3Dreverse.header.frame_id = "path";
     poses2D.header.frame_id = "path";
   }
-
+  void setFrameID(std::string frame_id) {
+      frame_id_=frame_id;
+      // CONFIGURE THE CONTAINER
+      poses3D.header.frame_id = frame_id;
+      poses3Dreverse.header.frame_id = frame_id;
+      poses2D.header.frame_id = frame_id;
+  }
   // CLEAR VISUALIZATION
   /// Clears the entire visualization
   void clear();
@@ -67,6 +73,7 @@ class Visualize {
   void publishNode2DCosts(Node2D* nodes, int width, int height);
 
  private:
+    std::string frame_id_;
   /// A handle to the ROS node
   ros::NodeHandle n;
   /// Publisher for a single 3D node

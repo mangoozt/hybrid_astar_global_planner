@@ -100,7 +100,7 @@ class Planner {
   /// Flags for allowing the planner to plan
   bool validGoal = false;
   /// A lookup table for configurations of the vehicle and their spatial occupancy enumeration
-  Constants::config collisionLookup[Constants::headings * Constants::positions];
+  Constants::configuration collisionLookup[Constants::headings * Constants::positions];
   /// A lookup of analytical solutions (Dubin's paths)
   float* dubinsLookup = new float [Constants::headings * Constants::headings * Constants::dubinsWidth * Constants::dubinsWidth];
 };

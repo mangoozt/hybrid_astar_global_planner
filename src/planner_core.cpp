@@ -92,6 +92,7 @@ ROS_WARN("Init Hybrid!!!!!!!!!!!!");
         ros::NodeHandle private_nh("~/" + name);
         costmap_ = costmap;
         frame_id_ = frame_id;
+        visualization.setFrameID(frame_id);
 /*
         if (cost_translation_table_ == NULL)
         {
@@ -154,12 +155,12 @@ ROS_WARN("Init Hybrid!!!!!!!!!!!!");
 }
 
 void HybridGlobalPlanner::reconfigureCB(HybridGlobalPlannerConfig& config, uint32_t level) {
-    //planner_->setLethalCost(config.lethal_cost);
-    //path_maker_->setLethalCost(config.lethal_cost);
-    //planner_->setNeutralCost(config.neutral_cost);
-    //planner_->setFactor(config.cost_factor);
-    //publish_potential_ = config.publish_potential;
-    //orientation_filter_->setMode(config.orientation_mode);
+    //planner_->setLethalCost(configuration.lethal_cost);
+    //path_maker_->setLethalCost(configuration.lethal_cost);
+    //planner_->setNeutralCost(configuration.neutral_cost);
+    //planner_->setFactor(configuration.cost_factor);
+    //publish_potential_ = configuration.publish_potential;
+    //orientation_filter_->setMode(configuration.orientation_mode);
 }
 
 void HybridGlobalPlanner::clearRobotCell(const tf::Stamped<tf::Pose>& global_pose, unsigned int mx, unsigned int my) {
@@ -217,6 +218,7 @@ bool HybridGlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, cons
 
     //clear the plan, just in case
     plan.clear();
+    visualization.clear();
     //update the configuration space with the current map
     configurationSpace.updateGrid(costmap_);
     // prepare Voronoi
@@ -315,16 +317,16 @@ bool HybridGlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, cons
 
     // ________________________
     // retrieving goal position
-    float x = goal.pose.position.x / HybridAStar::Constants::cellSize;
-    float y = goal.pose.position.y / HybridAStar::Constants::cellSize;
+    float x = goal.pose.position.x;
+    float y = goal.pose.position.y;
     float t = tf::getYaw(goal.pose.orientation);
     // set theta to a value (0,2PI]
     t = HybridAStar::Helper::normalizeHeadingRad(t);
     const HybridAStar::Node3D nGoal(x, y, t, 0, 0, nullptr);
     // _________________________
     // retrieving start position
-    x = start.pose.position.x / HybridAStar::Constants::cellSize;
-    y = start.pose.position.y / HybridAStar::Constants::cellSize;
+    x = start.pose.position.x;
+    y = start.pose.position.y;
     t = tf::getYaw(start.pose.orientation);
     // set theta to a value (0,2PI]
     t = HybridAStar::Helper::normalizeHeadingRad(t);
@@ -335,13 +337,15 @@ bool HybridGlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, cons
     path.clear();
     smoothedPath.clear();
     // FIND THE PATH
+    std::cout<<"\nwidth:"<<width<<"\n";
+    std::cout<<"\nheight:"<<height<<"\n";
     HybridAStar::Node3D* nSolution = HybridAStar::Algorithm::hybridAStar(nStart, nGoal, nodes3D, nodes2D, width, height, configurationSpace, dubinsLookup, visualization);
     // TRACE THE PATH
     smoother.tracePath(nSolution);
     // CREATE THE UPDATED PATH
     //path.updatePath(smoother.getPath());
     // SMOOTH THE PATH
-    smoother.smoothPath(voronoiDiagram);
+    //smoother.smoothPath(voronoiDiagram);
     // CREATE THE UPDATED PATH
     smoothedPath.updatePath(smoother.getPath());
 

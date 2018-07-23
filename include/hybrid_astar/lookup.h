@@ -77,8 +77,8 @@ inline int sign(double x) {
 
 // _________________________
 // COLLISION LOOKUP CREATION
-inline void collisionLookup(Constants::config* lookup) {
-  bool DEBUG = false;
+inline void collisionLookup(Constants::configuration* lookup) {
+  bool DEBUG = true;
   std::cout << "I am building the collision lookup table...";
   // cell size
   const float cSize = Constants::cellSize;
@@ -254,6 +254,10 @@ inline void collisionLookup(Constants::config* lookup) {
             }
           } else {
             // this SHOULD NOT happen
+              std::cout << "\nX="<<X<<"\n";
+              std::cout << "\nY="<<Y<<"\n";
+              std::cout << "\nend.x="<<end.x<<"\n";
+              std::cout << "\nend.y="<<end.y<<"\n";
             std::cout << "\n--->tie occured, please check for error in script\n";
             break;
           }
