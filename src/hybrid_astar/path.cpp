@@ -1,5 +1,5 @@
 #include "hybrid_astar/path.h"
-
+#include <boost/range/adaptor/reversed.hpp>
 using namespace HybridAStar;
 
 
@@ -143,7 +143,7 @@ void Path::addVehicle(const Node3D& node, int i) {
 }
 void Path::dump(std::vector<geometry_msgs::PoseStamped>& plan,std::string frame_id_){
     plan.clear();
-    for (auto &i : path.poses) {
+    for (auto &i :boost::adaptors::reverse(path.poses)) {
       //for (int i = path.size() -1; i>=0; i--) {
         //std::pair<float, float> point = path[i];
         //convert the plan to world coordinates

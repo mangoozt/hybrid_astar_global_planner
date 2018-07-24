@@ -55,7 +55,7 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
   int iterations = 0;
 
   // VISUALIZATION DELAY
-  ros::Duration d(0.003);
+  ros::Duration d(0.00);
 
   // OPEN LIST AS BOOST IMPLEMENTATION
   typedef boost::heap::binomial_heap<Node3D*,
@@ -93,8 +93,8 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
       visualization.publishNode3DPose(*nPred);
       d.sleep();
     }
-    std::cout << "\nX "<<nPred->getX()<<"\n";
-    std::cout << "\ny "<<nPred->getY()<<"\n";
+    std::cout << "\nX "<<nPred->getX();
+    std::cout << "\ny "<<nPred->getY();
     std::cout << "\nt "<<nPred->getT()<<"\n";
     // _____________________________
     // LAZY DELETION of rewired node
@@ -112,7 +112,7 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
       nodes3D[iPred].close();
       // remove node from open list
       O.pop();
-
+      std::cout << "\nEXpansion#1\n";
       // _________
       // GOAL TEST
       if (*nPred == goal || iterations > Constants::iterations) {
@@ -141,12 +141,17 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
           std::cout << "\ncreateSuccesor #"<<i<<"\n";
           // create possible successor
           nSucc = nPred->createSuccessor(i);
-          std::cout << "\nX "<<nSucc->getX()<<"\n";
-          std::cout << "\ny "<<nSucc->getY()<<"\n";
-          std::cout << "\nt "<<nSucc->getT()<<"\n";
+          //std::cout << "\nX "<<nSucc->getX()<<"\n";
+          //std::cout << "\ny "<<nSucc->getY()<<"\n";
+          //std::cout << "\nt "<<nSucc->getT()<<"\n";
           // set index of the successor
           iSucc = nSucc->setIdx(width, height);
 
+          if (Constants::visualization) {
+            visualization.publishNode3DPoses(*nSucc);
+            visualization.publishNode3DPose(*nSucc);
+            d.sleep();
+          }
           // ensure successor is on grid and traversable
           if (nSucc->isOnGrid(width, height)) std::cout << "\non grid"<<i<<"\n";
           if(configurationSpace.isTraversable(nSucc)) std::cout << "\ntraversable"<<i<<"\n";
@@ -162,7 +167,7 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
               // if successor not on open list or found a shorter way to the cell
               if (!nodes3D[iSucc].isOpen() || newG < nodes3D[iSucc].getG() || iPred == iSucc) {
                 std::cout << "\nnot on open list"<<i<<"\n";
-
+                  std::cout << "\n-------calculate H value"<<i<<"\n";
                 // calculate H value
                 updateH(*nSucc, goal, nodes2D, dubinsLookup, width, height, configurationSpace, visualization);
 
@@ -224,7 +229,7 @@ float aStar(Node2D& start,
   }
 
   // VISUALIZATION DELAY
-  ros::Duration d(0.001);
+  ros::Duration d(0.00);
 
   boost::heap::binomial_heap<Node2D*,
         boost::heap::compare<CompareNodes>> O;
@@ -267,6 +272,7 @@ float aStar(Node2D& start,
       if (Constants::visualization2D) {
         visualization.publishNode2DPoses(*nPred);
         visualization.publishNode2DPose(*nPred);
+       // visualization.publishNode2DCosts(nodes2D, width, height);
         //        d.sleep();
       }
 
@@ -404,17 +410,17 @@ void updateH(Node3D& start, const Node3D& goal, Node2D* nodes2D, float* dubinsLo
 
   // if twoD heuristic is activated determine shortest path
   // unconstrained with obstacles
-  if (Constants::twoD && !nodes2D[(int)start.getY() * width + (int)start.getX()].isDiscovered()) {
-    //    ros::Time t0 = ros::Time::now();
+  if (Constants::twoD && !nodes2D[((int)start.getY()) * width + (int)start.getX()].isDiscovered()) {
+        ros::Time t0 = ros::Time::now();
     // create a 2d start node
     Node2D start2d(start.getX(), start.getY(), 0, 0, nullptr);
     // create a 2d goal node
     Node2D goal2d(goal.getX(), goal.getY(), 0, 0, nullptr);
     // run 2d astar and return the cost of the cheapest path for that node
     nodes2D[(int)start.getY() * width + (int)start.getX()].setG(aStar(goal2d, start2d, nodes2D, width, height, configurationSpace, visualization));
-    //    ros::Time t1 = ros::Time::now();
-    //    ros::Duration d(t1 - t0);
-    //    std::cout << "calculated 2D Heuristic in ms: " << d * 1000 << std::endl;
+        ros::Time t1 = ros::Time::now();
+        ros::Duration d(t1 - t0);
+       std::cout << "calculated 2D Heuristic in ms: " << d * 1000 << std::endl;
   }
 
   if (Constants::twoD) {

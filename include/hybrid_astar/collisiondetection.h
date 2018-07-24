@@ -54,10 +54,11 @@ class CollisionDetection {
 
     // 2D collision test
     if (t == 99) {
-      return !grid->getCharMap()[node->getIdx()];
+      return grid->getCharMap()[node->getIdx()]<200;
     }
 
     if (true) {
+        return grid->getCost(node->getX(),node->getY())<200;
       cost = configurationTest(x, y, t) ? 0 : 1;
     } else {
       cost = configurationCost(x, y, t);

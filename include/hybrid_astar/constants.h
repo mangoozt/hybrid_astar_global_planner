@@ -36,7 +36,7 @@ static const bool manual = false;
 /// A flag for the visualization of 3D nodes (true = on; false = off)
 static const bool visualization = true;
 /// A flag for the visualization of 2D nodes (true = on; false = off)
-static const bool visualization2D = 1 * manual;
+static const bool visualization2D = true;
 /// A flag to toggle reversing (true = on; false = off)
 static const bool reverse = true;
 /// A flag to toggle the connection of the path via Dubin's shot (true = on; false = off)
@@ -64,7 +64,7 @@ static const double width = 0.25 + 2 * bloating;
 /// [m] --- The length of the vehicle
 static const double length = 0.6 + 2 * bloating;
 /// [m] --- The minimum turning radius of the vehicle
-static const float r = 1;
+static const float r = 10;
 /// [m] --- The number of discretizations in heading
 static const int headings = 72;
 /// [°] --- The discretization value of the heading (goal condition)
@@ -91,15 +91,15 @@ static const float tieBreaker = 0.01;
 /// [#] --- A factor to ensure admissibility of the holonomic with obstacles heuristic
 static const float factor2D = sqrt(5) / sqrt(2) + 1;
 /// [#] --- A movement cost penalty for turning (choosing non straight motion primitives)
-static const float penaltyTurning = 1.05;
+static const float penaltyTurning = 1;
 /// [#] --- A movement cost penalty for reversing (choosing motion primitives > 2)
-static const float penaltyReversing = 2.0;
+static const float penaltyReversing = 1.2;
 /// [#] --- A movement cost penalty for change of direction (changing from primitives < 3 to primitives > 2)
-static const float penaltyCOD = 2.0;
+static const float penaltyCOD = 1.5;
 /// [m] --- The distance to the goal when the analytical solution (Dubin's shot) first triggers
 static const float dubinsShotDistance = 100;
 /// [m] --- The step size for the analytical solution (Dubin's shot) primarily relevant for collision checking
-static const float dubinsStepSize = 0.1;
+static const float dubinsStepSize = 1;
 
 
 // ______________________
@@ -115,7 +115,7 @@ static const int dubinsArea = dubinsWidth * dubinsWidth;
 // COLLISION LOOKUP SPECIFIC
 
 /// [m] -- The bounding box size length and width to precompute all possible headings
-static const int bbSize = std::ceil((sqrt(width * width + length* length) + 0.1) / cellSize);
+static const int bbSize = std::ceil((sqrt(width * width + length* length) + 4) / cellSize);
 /// [#] --- The sqrt of the number of discrete positions per cell
 static const int positionResolution = 1;
 /// [#] --- The number of discrete positions per cell

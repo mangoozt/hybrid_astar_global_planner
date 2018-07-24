@@ -1,3 +1,4 @@
+#include <cmath>
 #include "hybrid_astar/node3d.h"
 
 using namespace HybridAStar;
@@ -10,10 +11,12 @@ const int Node3D::dir = 3;
 //const float Node3D::dx[] = { 0.62832,   0.62717,   0.62717};
 //const float Node3D::dt[] = { 0,         0.10472,   -0.10472};
 
-const float Node3D::R = 0.5;
-const float Node3D::s = 3.1415926535897*5/180;
-const float Node3D::dy[] = { 0,        -Node3D::R*(1-cos(Node3D::s)),  Node3D::R*(1-cos(Node3D::s))};
-const float Node3D::dx[] = { Node3D::R*Node3D::s,   Node3D::R*sin(Node3D::s),   Node3D::R*sin(Node3D::s)};
+//const float Node3D::R = Constants::r/Constants::cellSize;
+const float Node3D::R = Constants::r;
+const float Node3D::s = Constants::deltaHeadingRad;
+//const float Node3D::s = 3.1415926535897*6.75/180;
+const float Node3D::dy[] = { 0,        -Node3D::R*(1.f-std::cos(Node3D::s)),  Node3D::R*(1-std::cos(Node3D::s))};
+const float Node3D::dx[] = { Node3D::R*Node3D::s,   Node3D::R*std::sin(Node3D::s),   Node3D::R*std::sin(Node3D::s)};
 const float Node3D::dt[] = { 0,         Node3D::s,   -Node3D::s};
 // R = 6, 6.75 DEG
 //const float Node3D::dy[] = { 0,        -0.0415893,  0.0415893};
@@ -33,7 +36,7 @@ const float Node3D::dt[] = { 0,         Node3D::s,   -Node3D::s};
 //                                         IS ON GRID
 //###################################################
 bool Node3D::isOnGrid(const int width, const int height) const {
-  return x >= 0 && x < width*Constants::cellSize && y >= 0 && y < height*width*Constants::cellSize && (int)(t / Constants::deltaHeadingRad) >= 0 && (int)(t / Constants::deltaHeadingRad) < Constants::headings;
+  return x >= 0 && x < width && y >= 0 && y < height*width && (int)(t / Constants::deltaHeadingRad) >= 0 && (int)(t / Constants::deltaHeadingRad) < Constants::headings;
 }
 
 

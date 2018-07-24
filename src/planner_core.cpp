@@ -41,12 +41,6 @@
 #include <costmap_2d/cost_values.h>
 #include <costmap_2d/costmap_2d.h>
 
-#include <hybrida_global_planner/dijkstra.h>
-#include <hybrida_global_planner/astar.h>
-#include <hybrida_global_planner/grid_path.h>
-#include <hybrida_global_planner/gradient_path.h>
-#include <hybrida_global_planner/quadratic_calculator.h>
-
 //register this planner as a BaseGlobalPlanner plugin
 PLUGINLIB_EXPORT_CLASS(hybrid_astar_global_planner::HybridGlobalPlanner, nav_core::BaseGlobalPlanner)
 
@@ -113,7 +107,7 @@ ROS_WARN("Init Hybrid!!!!!!!!!!!!");
         }
 */
 
-        unsigned int cx = costmap->getSizeInCellsX(), cy = costmap->getSizeInCellsY();
+        //unsigned int cx = costmap->getSizeInCellsX(), cy = costmap->getSizeInCellsY();
 
         private_nh.param("old_navfn_behavior", old_navfn_behavior_, false);
         if(!old_navfn_behavior_)
@@ -222,8 +216,8 @@ bool HybridGlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, cons
     //update the configuration space with the current map
     configurationSpace.updateGrid(costmap_);
     // prepare Voronoi
-    int height = costmap_->getSizeInCellsY();
-    int width = costmap_->getSizeInCellsX();
+    unsigned int height = costmap_->getSizeInCellsY();
+    unsigned int width = costmap_->getSizeInCellsX();
     bool** binMap;
     binMap = new bool*[width];
 
@@ -317,16 +311,16 @@ bool HybridGlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, cons
 
     // ________________________
     // retrieving goal position
-    float x = goal.pose.position.x;
-    float y = goal.pose.position.y;
+    float x = goal_x;
+    float y = goal_y;
     float t = tf::getYaw(goal.pose.orientation);
     // set theta to a value (0,2PI]
     t = HybridAStar::Helper::normalizeHeadingRad(t);
     const HybridAStar::Node3D nGoal(x, y, t, 0, 0, nullptr);
     // _________________________
     // retrieving start position
-    x = start.pose.position.x;
-    y = start.pose.position.y;
+    x = start_x;
+    y = start_y;
     t = tf::getYaw(start.pose.orientation);
     // set theta to a value (0,2PI]
     t = HybridAStar::Helper::normalizeHeadingRad(t);
@@ -358,6 +352,8 @@ bool HybridGlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, cons
     //smoothedPath.publishPath();
     //smoothedPath.publishPathNodes();
     //smoothedPath.publishPathVehicles();
+    //visualization.publishNode3DCosts(nodes3D, width, height, depth);
+    visualization.publishNode2DCosts(nodes2D, width, height);
 
     smoothedPath.dump(plan,frame_id_);
 

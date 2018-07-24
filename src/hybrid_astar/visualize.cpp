@@ -73,7 +73,7 @@ void Visualize::publishNode3DPoses(Node3D& node) {
   }
   //REVERSE
   else {
-    pose.orientation = tf::createQuaternionMsgFromYaw(node.getT() + M_PI);
+    pose.orientation = tf::createQuaternionMsgFromYaw(node.getT());
     poses3Dreverse.poses.push_back(pose);
     poses3Dreverse.header.stamp = ros::Time::now();
     // PUBLISH THE POSEARRAY
