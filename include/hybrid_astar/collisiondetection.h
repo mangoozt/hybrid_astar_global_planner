@@ -58,8 +58,8 @@ class CollisionDetection {
     }
 
     if (true) {
-        return grid->getCost(node->getX(),node->getY())<200;
-      cost = configurationTest(x, y, t) ? 0 : 1;
+        //return grid->getCost(node->getX(),node->getY())<200;
+      return configurationTest(x, y, t);
     } else {
       cost = configurationCost(x, y, t);
     }

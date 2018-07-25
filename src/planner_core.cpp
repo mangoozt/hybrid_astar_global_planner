@@ -339,7 +339,7 @@ bool HybridGlobalPlanner::makePlan(const geometry_msgs::PoseStamped& start, cons
     // CREATE THE UPDATED PATH
     //path.updatePath(smoother.getPath());
     // SMOOTH THE PATH
-    //smoother.smoothPath(voronoiDiagram);
+    smoother.smoothPath(voronoiDiagram);
     // CREATE THE UPDATED PATH
     smoothedPath.updatePath(smoother.getPath());
 

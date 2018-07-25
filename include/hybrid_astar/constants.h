@@ -64,7 +64,7 @@ static const double width = 0.25 + 2 * bloating;
 /// [m] --- The length of the vehicle
 static const double length = 0.6 + 2 * bloating;
 /// [m] --- The minimum turning radius of the vehicle
-static const float r = 10;
+static const float r = 12;
 /// [m] --- The number of discretizations in heading
 static const int headings = 72;
 /// [°] --- The discretization value of the heading (goal condition)
@@ -89,13 +89,13 @@ static const float tieBreaker = 0.01;
 // HEURISTIC CONSTANTS
 
 /// [#] --- A factor to ensure admissibility of the holonomic with obstacles heuristic
-static const float factor2D = sqrt(5) / sqrt(2) + 1;
+static const float factor2D = 1;
 /// [#] --- A movement cost penalty for turning (choosing non straight motion primitives)
-static const float penaltyTurning = 1;
+static const float penaltyTurning = 1.2;
 /// [#] --- A movement cost penalty for reversing (choosing motion primitives > 2)
-static const float penaltyReversing = 1.2;
+static const float penaltyReversing = 1.5;
 /// [#] --- A movement cost penalty for change of direction (changing from primitives < 3 to primitives > 2)
-static const float penaltyCOD = 1.5;
+static const float penaltyCOD = 3;
 /// [m] --- The distance to the goal when the analytical solution (Dubin's shot) first triggers
 static const float dubinsShotDistance = 100;
 /// [m] --- The step size for the analytical solution (Dubin's shot) primarily relevant for collision checking
@@ -115,7 +115,7 @@ static const int dubinsArea = dubinsWidth * dubinsWidth;
 // COLLISION LOOKUP SPECIFIC
 
 /// [m] -- The bounding box size length and width to precompute all possible headings
-static const int bbSize = std::ceil((sqrt(width * width + length* length) + 4) / cellSize);
+static const int bbSize = std::ceil((sqrt(width * width + length* length) + 1) / cellSize);
 /// [#] --- The sqrt of the number of discrete positions per cell
 static const int positionResolution = 1;
 /// [#] --- The number of discrete positions per cell

@@ -1,4 +1,5 @@
 #include <cmath>
+#include <iostream>
 #include "hybrid_astar/node3d.h"
 
 using namespace HybridAStar;
@@ -11,9 +12,9 @@ const int Node3D::dir = 3;
 //const float Node3D::dx[] = { 0.62832,   0.62717,   0.62717};
 //const float Node3D::dt[] = { 0,         0.10472,   -0.10472};
 
-//const float Node3D::R = Constants::r/Constants::cellSize;
+//const float Node3D::R = 6;
 const float Node3D::R = Constants::r;
-const float Node3D::s = Constants::deltaHeadingRad;
+const float Node3D::s = ceil(sqrt(2)/(Constants::deltaHeadingRad*Node3D::R))*Constants::deltaHeadingRad;
 //const float Node3D::s = 3.1415926535897*6.75/180;
 const float Node3D::dy[] = { 0,        -Node3D::R*(1.f-std::cos(Node3D::s)),  Node3D::R*(1-std::cos(Node3D::s))};
 const float Node3D::dx[] = { Node3D::R*Node3D::s,   Node3D::R*std::sin(Node3D::s),   Node3D::R*std::sin(Node3D::s)};
@@ -80,6 +81,22 @@ Node3D* Node3D::createSuccessor(const int i) {
 //###################################################
 void Node3D::updateG() {
   // forward driving
+
+  float dg=dx[0];
+  // penalize reversing
+  if(prim>2){
+    dg*=Constants::penaltyReversing;
+  }
+  // penalize non-straight primitives
+  if(prim!=0||prim!=3){
+    dg*=Constants::penaltyTurning;
+  }
+  // penalize change of direction
+  if((int)(prim/3)!=(int)(pred->prim/3)){
+    dg*=Constants::penaltyCOD;
+  }
+  g+=dg;
+     /*
   if (prim < 3) {
     // penalize turning
     if (pred->prim != prim) {
@@ -106,7 +123,7 @@ void Node3D::updateG() {
     } else {
       g += dx[0] * Constants::penaltyReversing;
     }
-  }
+  }*/
 }
 
 

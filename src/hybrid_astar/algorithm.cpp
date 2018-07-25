@@ -8,6 +8,62 @@ float aStar(Node2D& start, Node2D& goal, Node2D* nodes2D, int width, int height,
 void updateH(Node3D& start, const Node3D& goal, Node2D* nodes2D, float* dubinsLookup, int width, int height, CollisionDetection& configurationSpace, Visualize& visualization);
 Node3D* dubinsShot(Node3D& start, const Node3D& goal, CollisionDetection& configurationSpace);
 
+Node3D* dubinsShotRev(Node3D& start, const Node3D& goal, CollisionDetection& configurationSpace) {
+  // start
+  float t=start.getT()+M_PI;
+  if(t>2*M_PI) t-=2*M_PI;
+  double q0[] = { start.getX(), start.getY(), t};
+  // goal
+  t=goal.getT()+M_PI;
+  if(t>2*M_PI) t-=2*M_PI;
+  double q1[] = { goal.getX(), goal.getY(), t };
+  // initialize the path
+  DubinsPath path;
+  // calculate the path
+  dubins_init(q0, q1, Constants::r, &path);
+
+  int i = 0;
+  float x = 0.f;
+  float length = dubins_path_length(&path);
+
+  Node3D* dubinsNodes = new Node3D [(int)(length / Constants::dubinsStepSize) + 1];
+
+  while (x <  length) {
+    double q[3];
+    dubins_path_sample(&path, x, q);
+    dubinsNodes[i].setX(q[0]);
+    dubinsNodes[i].setY(q[1]);
+    t=q[2]+M_PI;
+    if(t>2*M_PI) t-=2*M_PI;
+    dubinsNodes[i].setT(Helper::normalizeHeadingRad(t));
+
+    // collision check
+    if (configurationSpace.isTraversable(&dubinsNodes[i])) {
+
+      // set the predecessor to the previous step
+      if (i > 0) {
+        dubinsNodes[i].setPred(&dubinsNodes[i - 1]);
+      } else {
+        dubinsNodes[i].setPred(&start);
+      }
+
+      if (&dubinsNodes[i] == dubinsNodes[i].getPred()) {
+        std::cout << "looping shot";
+      }
+
+      x += Constants::dubinsStepSize;
+      i++;
+    } else {
+      //      std::cout << "Dubins shot collided, discarding the path" << "\n";
+      // delete all nodes
+      delete [] dubinsNodes;
+      return nullptr;
+    }
+  }
+
+  //  std::cout << "Dubins shot connected, returning the path" << "\n";
+  return &dubinsNodes[i - 1];
+}
 //###################################################
 //                                    NODE COMPARISON
 //###################################################
@@ -80,7 +136,7 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
 
   // continue until O empty
   while (!O.empty()) {
-    std::cout << "\nO.top()\n";
+    std::cout << "\ni:"<<iterations;
     // pop node with lowest cost from priority queue
     nPred = O.top();
     // set index
@@ -93,9 +149,6 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
       visualization.publishNode3DPose(*nPred);
       d.sleep();
     }
-    std::cout << "\nX "<<nPred->getX();
-    std::cout << "\ny "<<nPred->getY();
-    std::cout << "\nt "<<nPred->getT()<<"\n";
     // _____________________________
     // LAZY DELETION of rewired node
     // if there exists a pointer this node has already been expanded
@@ -107,12 +160,10 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
     // _________________
     // EXPANSION OF NODE
     else if (nodes3D[iPred].isOpen()) {
-      std::cout << "\nEXpansion\n";
       // add node to closed list
       nodes3D[iPred].close();
       // remove node from open list
       O.pop();
-      std::cout << "\nEXpansion#1\n";
       // _________
       // GOAL TEST
       if (*nPred == goal || iterations > Constants::iterations) {
@@ -134,11 +185,22 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
             return nSucc;
           }
         }
+        if (Constants::dubinsShot && nPred->isInRange(goal) && nPred->getPrim() > 2) {
+          nSucc = dubinsShotRev(*nPred, goal, configurationSpace);
+          std::cout<<"\nDubinsShotRev";
+          if (nSucc != nullptr && *nSucc == goal) {
+            //DEBUG
+            // std::cout << "max diff " << max << std::endl;
+            return nSucc;
+          }
+          std::cout<<"Nope(\n";
+          if (nSucc != nullptr) std::cout<<"nSucc x:"<<nSucc->getX()<<";y:"<<nSucc->getY()<<";t:"<<nSucc->getT();
+          std::cout<<"goal x:"<<goal.getX()<<";y:"<<goal.getY()<<";t:"<<goal.getT();
+        }
 
         // ______________________________
         // SEARCH WITH FORWARD SIMULATION
         for (int i = 0; i < dir; i++) {
-          std::cout << "\ncreateSuccesor #"<<i<<"\n";
           // create possible successor
           nSucc = nPred->createSuccessor(i);
           //std::cout << "\nX "<<nSucc->getX()<<"\n";
@@ -153,27 +215,20 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
             d.sleep();
           }
           // ensure successor is on grid and traversable
-          if (nSucc->isOnGrid(width, height)) std::cout << "\non grid"<<i<<"\n";
-          if(configurationSpace.isTraversable(nSucc)) std::cout << "\ntraversable"<<i<<"\n";
           if (nSucc->isOnGrid(width, height) && configurationSpace.isTraversable(nSucc)) {
-            std::cout << "\non grid&traversable"<<i<<"\n";
             // ensure successor is not on closed list or it has the same index as the predecessor
             if (!nodes3D[iSucc].isClosed() || iPred == iSucc) {
-              std::cout << "\nnot on closed list"<<i<<"\n";
               // calculate new G value
               nSucc->updateG();
               newG = nSucc->getG();
 
               // if successor not on open list or found a shorter way to the cell
               if (!nodes3D[iSucc].isOpen() || newG < nodes3D[iSucc].getG() || iPred == iSucc) {
-                std::cout << "\nnot on open list"<<i<<"\n";
-                  std::cout << "\n-------calculate H value"<<i<<"\n";
                 // calculate H value
                 updateH(*nSucc, goal, nodes2D, dubinsLookup, width, height, configurationSpace, visualization);
 
                 // if the successor is in the same cell but the C value is larger
                 if (iPred == iSucc && nSucc->getC() > nPred->getC() + Constants::tieBreaker) {
-                  std::cout << "\nthe successor is in the same cell but the C value is larger"<<i<<"\n";
 
                   delete nSucc;
                   continue;
@@ -188,7 +243,6 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
                 }
 
                 // put successor on open list
-                std::cout << "\nput successor on open list"<<i<<"\n";
                 nSucc->open();
                 nodes3D[iSucc] = *nSucc;
                 O.push(&nodes3D[iSucc]);
@@ -418,9 +472,9 @@ void updateH(Node3D& start, const Node3D& goal, Node2D* nodes2D, float* dubinsLo
     Node2D goal2d(goal.getX(), goal.getY(), 0, 0, nullptr);
     // run 2d astar and return the cost of the cheapest path for that node
     nodes2D[(int)start.getY() * width + (int)start.getX()].setG(aStar(goal2d, start2d, nodes2D, width, height, configurationSpace, visualization));
-        ros::Time t1 = ros::Time::now();
-        ros::Duration d(t1 - t0);
-       std::cout << "calculated 2D Heuristic in ms: " << d * 1000 << std::endl;
+       // ros::Time t1 = ros::Time::now();
+       // ros::Duration d(t1 - t0);
+       //std::cout << "calculated 2D Heuristic in ms: " << d * 1000 << std::endl;
   }
 
   if (Constants::twoD) {

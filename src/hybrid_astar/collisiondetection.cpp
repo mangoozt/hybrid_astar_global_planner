@@ -46,7 +46,7 @@ bool CollisionDetection::configurationTest(float x, float y, float t) {
 
     // make sure the configuration coordinates are actually on the grid
     if (cX >= 0 && (unsigned int)cX < grid->getSizeInCellsX() && cY >= 0 && (unsigned int)cY < grid->getSizeInCellsY()) {
-      if (grid->getCharMap()[cY * grid->getSizeInCellsX() + cX]!=costmap_2d::FREE_SPACE) {
+      if (grid->getCharMap()[cY * grid->getSizeInCellsX() + cX]>costmap_2d::INSCRIBED_INFLATED_OBSTACLE) {
         return false;
       }
     }else return false;
