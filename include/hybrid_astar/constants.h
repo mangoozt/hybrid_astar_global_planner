@@ -91,13 +91,13 @@ static const float tieBreaker = 0.01;
 /// [#] --- A factor to ensure admissibility of the holonomic with obstacles heuristic
 static const float factor2D = 1;
 /// [#] --- A movement cost penalty for turning (choosing non straight motion primitives)
-static const float penaltyTurning = 1.2;
+static const float penaltyTurning = 1;
 /// [#] --- A movement cost penalty for reversing (choosing motion primitives > 2)
-static const float penaltyReversing = 1.5;
+static const float penaltyReversing = 1.2;
 /// [#] --- A movement cost penalty for change of direction (changing from primitives < 3 to primitives > 2)
-static const float penaltyCOD = 3;
+static const float penaltyCOD = 2;
 /// [m] --- The distance to the goal when the analytical solution (Dubin's shot) first triggers
-static const float dubinsShotDistance = 100;
+static const float dubinsShotDistance = 100/(cellSize*cellSize);
 /// [m] --- The step size for the analytical solution (Dubin's shot) primarily relevant for collision checking
 static const float dubinsStepSize = 1;
 

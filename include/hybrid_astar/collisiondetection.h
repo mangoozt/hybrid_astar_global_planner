@@ -54,7 +54,7 @@ class CollisionDetection {
 
     // 2D collision test
     if (t == 99) {
-      return grid->getCharMap()[node->getIdx()]<200;
+      return grid->getCharMap()[node->getIdx()]<150;
     }
 
     if (true) {

@@ -8,62 +8,6 @@ float aStar(Node2D& start, Node2D& goal, Node2D* nodes2D, int width, int height,
 void updateH(Node3D& start, const Node3D& goal, Node2D* nodes2D, float* dubinsLookup, int width, int height, CollisionDetection& configurationSpace, Visualize& visualization);
 Node3D* dubinsShot(Node3D& start, const Node3D& goal, CollisionDetection& configurationSpace);
 
-Node3D* dubinsShotRev(Node3D& start, const Node3D& goal, CollisionDetection& configurationSpace) {
-  // start
-  float t=start.getT()+M_PI;
-  if(t>2*M_PI) t-=2*M_PI;
-  double q0[] = { start.getX(), start.getY(), t};
-  // goal
-  t=goal.getT()+M_PI;
-  if(t>2*M_PI) t-=2*M_PI;
-  double q1[] = { goal.getX(), goal.getY(), t };
-  // initialize the path
-  DubinsPath path;
-  // calculate the path
-  dubins_init(q0, q1, Constants::r, &path);
-
-  int i = 0;
-  float x = 0.f;
-  float length = dubins_path_length(&path);
-
-  Node3D* dubinsNodes = new Node3D [(int)(length / Constants::dubinsStepSize) + 1];
-
-  while (x <  length) {
-    double q[3];
-    dubins_path_sample(&path, x, q);
-    dubinsNodes[i].setX(q[0]);
-    dubinsNodes[i].setY(q[1]);
-    t=q[2]+M_PI;
-    if(t>2*M_PI) t-=2*M_PI;
-    dubinsNodes[i].setT(Helper::normalizeHeadingRad(t));
-
-    // collision check
-    if (configurationSpace.isTraversable(&dubinsNodes[i])) {
-
-      // set the predecessor to the previous step
-      if (i > 0) {
-        dubinsNodes[i].setPred(&dubinsNodes[i - 1]);
-      } else {
-        dubinsNodes[i].setPred(&start);
-      }
-
-      if (&dubinsNodes[i] == dubinsNodes[i].getPred()) {
-        std::cout << "looping shot";
-      }
-
-      x += Constants::dubinsStepSize;
-      i++;
-    } else {
-      //      std::cout << "Dubins shot collided, discarding the path" << "\n";
-      // delete all nodes
-      delete [] dubinsNodes;
-      return nullptr;
-    }
-  }
-
-  //  std::cout << "Dubins shot connected, returning the path" << "\n";
-  return &dubinsNodes[i - 1];
-}
 //###################################################
 //                                    NODE COMPARISON
 //###################################################
@@ -111,7 +55,7 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
   int iterations = 0;
 
   // VISUALIZATION DELAY
-  ros::Duration d(0.00);
+  ros::Duration d(0.0);
 
   // OPEN LIST AS BOOST IMPLEMENTATION
   typedef boost::heap::binomial_heap<Node3D*,
@@ -142,11 +86,13 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
     // set index
     iPred = nPred->setIdx(width, height);
     iterations++;
-
+    std::cout<<" G="<<nPred->getG();
+    std::cout<<" H="<<nPred->getH();
+    std::cout<<" C="<<nPred->getC();
     // RViz visualization
     if (Constants::visualization) {
       visualization.publishNode3DPoses(*nPred);
-      visualization.publishNode3DPose(*nPred);
+      //visualization.publishNode3DPose(*nPred);
       d.sleep();
     }
     // _____________________________
@@ -166,6 +112,8 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
       O.pop();
       // _________
       // GOAL TEST
+      std::cout<<"\nnode:"<<nPred->getX()<<" "<<nPred->getY()<<" "<<nPred->getT();
+      std::cout<<"\ngoal:"<<goal.getX()<<" "<<goal.getY()<<" "<<goal.getT();
       if (*nPred == goal || iterations > Constants::iterations) {
         // DEBUG
         return nPred;
@@ -177,24 +125,16 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
         // _______________________
         // SEARCH WITH DUBINS SHOT
         if (Constants::dubinsShot && nPred->isInRange(goal) && nPred->getPrim() < 3) {
+          visualization.publishNode3DPose(*nPred);
           nSucc = dubinsShot(*nPred, goal, configurationSpace);
 
-          if (nSucc != nullptr && *nSucc == goal) {
-            //DEBUG
-            // std::cout << "max diff " << max << std::endl;
-            return nSucc;
-          }
-        }
-        if (Constants::dubinsShot && nPred->isInRange(goal) && nPred->getPrim() > 2) {
-          nSucc = dubinsShotRev(*nPred, goal, configurationSpace);
-          std::cout<<"\nDubinsShotRev";
+          std::cout<<"\nDubinsShot";
           if (nSucc != nullptr && *nSucc == goal) {
             //DEBUG
             // std::cout << "max diff " << max << std::endl;
             return nSucc;
           }
           std::cout<<"Nope(\n";
-          if (nSucc != nullptr) std::cout<<"nSucc x:"<<nSucc->getX()<<";y:"<<nSucc->getY()<<";t:"<<nSucc->getT();
           std::cout<<"goal x:"<<goal.getX()<<";y:"<<goal.getY()<<";t:"<<goal.getT();
         }
 
@@ -481,10 +421,14 @@ void updateH(Node3D& start, const Node3D& goal, Node2D* nodes2D, float* dubinsLo
     // offset for same node in cell
     twoDoffset = sqrt(((start.getX() - (long)start.getX()) - (goal.getX() - (long)goal.getX())) * ((start.getX() - (long)start.getX()) - (goal.getX() - (long)goal.getX())) +
                       ((start.getY() - (long)start.getY()) - (goal.getY() - (long)goal.getY())) * ((start.getY() - (long)start.getY()) - (goal.getY() - (long)goal.getY())));
-    twoDCost = nodes2D[(int)start.getY() * width + (int)start.getX()].getG() - twoDoffset;
+    twoDoffset=0;
+      twoDCost = (nodes2D[(int)start.getY() * width + (int)start.getX()].getG() - twoDoffset)*1.01;
 
   }
-
+  //if(reedsSheppCost>twoDCost)
+    std::cout<<"\nreeds"<<reedsSheppCost;
+  //else
+    std::cout<<"\ntwoD"<<twoDCost;
   // return the maximum of the heuristics, making the heuristic admissable
   start.setH(std::max(reedsSheppCost, std::max(dubinsCost, twoDCost)));
 }
@@ -514,7 +458,7 @@ Node3D* dubinsShot(Node3D& start, const Node3D& goal, CollisionDetection& config
     dubinsNodes[i].setX(q[0]);
     dubinsNodes[i].setY(q[1]);
     dubinsNodes[i].setT(Helper::normalizeHeadingRad(q[2]));
-
+    std::cout<<"\ndNode["<<i<<"]:"<<q[0]<<" "<<q[1]<<" "<<q[2];
     // collision check
     if (configurationSpace.isTraversable(&dubinsNodes[i])) {
 

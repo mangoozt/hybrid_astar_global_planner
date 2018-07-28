@@ -16,7 +16,7 @@ const int Node3D::dir = 3;
 const float Node3D::R = Constants::r;
 const float Node3D::s = ceil(sqrt(2)/(Constants::deltaHeadingRad*Node3D::R))*Constants::deltaHeadingRad;
 //const float Node3D::s = 3.1415926535897*6.75/180;
-const float Node3D::dy[] = { 0,        -Node3D::R*(1.f-std::cos(Node3D::s)),  Node3D::R*(1-std::cos(Node3D::s))};
+const float Node3D::dy[] = { 0,        -Node3D::R*(1.f-std::cos(Node3D::s)),  Node3D::R*(1.f-std::cos(Node3D::s))};
 const float Node3D::dx[] = { Node3D::R*Node3D::s,   Node3D::R*std::sin(Node3D::s),   Node3D::R*std::sin(Node3D::s)};
 const float Node3D::dt[] = { 0,         Node3D::s,   -Node3D::s};
 // R = 6, 6.75 DEG
@@ -45,9 +45,11 @@ bool Node3D::isOnGrid(const int width, const int height) const {
 //                                        IS IN RANGE
 //###################################################
 bool Node3D::isInRange(const Node3D& goal) const {
-  int random = rand() % 10 + 1;
-  float dx = std::abs(x - goal.x) / random;
-  float dy = std::abs(y - goal.y) / random;
+  //int random = rand() % 10 + 1;
+  //float dx = std::abs(x - goal.x) / random;
+  //float dy = std::abs(y - goal.y) / random;
+  float dx = std::abs(x - goal.x);
+  float dy = std::abs(y - goal.y);
   return (dx * dx) + (dy * dy) < Constants::dubinsShotDistance;
 }
 
@@ -81,14 +83,14 @@ Node3D* Node3D::createSuccessor(const int i) {
 //###################################################
 void Node3D::updateG() {
   // forward driving
-
+/*
   float dg=dx[0];
   // penalize reversing
   if(prim>2){
     dg*=Constants::penaltyReversing;
   }
   // penalize non-straight primitives
-  if(prim!=0||prim!=3){
+  if(prim!=0 & prim!=3){
     dg*=Constants::penaltyTurning;
   }
   // penalize change of direction
@@ -96,7 +98,8 @@ void Node3D::updateG() {
     dg*=Constants::penaltyCOD;
   }
   g+=dg;
-     /*
+  */
+
   if (prim < 3) {
     // penalize turning
     if (pred->prim != prim) {
@@ -123,7 +126,7 @@ void Node3D::updateG() {
     } else {
       g += dx[0] * Constants::penaltyReversing;
     }
-  }*/
+  }
 }
 
 
