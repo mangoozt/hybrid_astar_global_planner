@@ -60,9 +60,9 @@ static const int iterations = 30000;
 /// [m] --- Uniformly adds a padding around the vehicle
 static const double bloating = 0;
 /// [m] --- The width of the vehicle
-static const double width = 0.25 + 2 * bloating;
+static const double width = 0.4 + 2 * bloating;
 /// [m] --- The length of the vehicle
-static const double length = 0.6 + 2 * bloating;
+static const double length = 1.0 + 2 * bloating;
 /// [m] --- The minimum turning radius of the vehicle
 static const float r = 12;
 /// [m] --- The number of discretizations in heading
@@ -93,13 +93,13 @@ static const float factor2D = 1;
 /// [#] --- A movement cost penalty for turning (choosing non straight motion primitives)
 static const float penaltyTurning = 1;
 /// [#] --- A movement cost penalty for reversing (choosing motion primitives > 2)
-static const float penaltyReversing = 1.2;
+static const float penaltyReversing = 1;
 /// [#] --- A movement cost penalty for change of direction (changing from primitives < 3 to primitives > 2)
 static const float penaltyCOD = 2;
 /// [m] --- The distance to the goal when the analytical solution (Dubin's shot) first triggers
 static const float dubinsShotDistance = 100/(cellSize*cellSize);
 /// [m] --- The step size for the analytical solution (Dubin's shot) primarily relevant for collision checking
-static const float dubinsStepSize = 1;
+static const float dubinsStepSize = 0.5;
 
 
 // ______________________

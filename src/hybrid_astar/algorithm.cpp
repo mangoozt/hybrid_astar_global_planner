@@ -6,7 +6,8 @@ using namespace HybridAStar;
 
 float aStar(Node2D& start, Node2D& goal, Node2D* nodes2D, int width, int height, CollisionDetection& configurationSpace, Visualize& visualization);
 void updateH(Node3D& start, const Node3D& goal, Node2D* nodes2D, float* dubinsLookup, int width, int height, CollisionDetection& configurationSpace, Visualize& visualization);
-Node3D* dubinsShot(Node3D& start, const Node3D& goal, CollisionDetection& configurationSpace);
+Node3D* dubinsShot(Node3D& start, const Node3D& goal, CollisionDetection& configurationSpace,
+                               Visualize& visualization);
 
 //###################################################
 //                                    NODE COMPARISON
@@ -126,7 +127,7 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
         // SEARCH WITH DUBINS SHOT
         if (Constants::dubinsShot && nPred->isInRange(goal) && nPred->getPrim() < 3) {
           visualization.publishNode3DPose(*nPred);
-          nSucc = dubinsShot(*nPred, goal, configurationSpace);
+          nSucc = dubinsShot(*nPred, goal, configurationSpace,visualization);
 
           std::cout<<"\nDubinsShot";
           if (nSucc != nullptr && *nSucc == goal) {
@@ -436,7 +437,8 @@ void updateH(Node3D& start, const Node3D& goal, Node2D* nodes2D, float* dubinsLo
 //###################################################
 //                                        DUBINS SHOT
 //###################################################
-Node3D* dubinsShot(Node3D& start, const Node3D& goal, CollisionDetection& configurationSpace) {
+Node3D* dubinsShot(Node3D& start, const Node3D& goal, CollisionDetection& configurationSpace,
+                               Visualize& visualization) {
   // start
   double q0[] = { start.getX(), start.getY(), start.getT() };
   // goal
@@ -481,6 +483,7 @@ Node3D* dubinsShot(Node3D& start, const Node3D& goal, CollisionDetection& config
       delete [] dubinsNodes;
       return nullptr;
     }
+    visualization.publishNode3DPoses(dubinsNodes[i]);
   }
 
   //  std::cout << "Dubins shot connected, returning the path" << "\n";
