@@ -1,3 +1,0 @@
-/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/mark/catkin_ws/src/hybrid_astar_global_planner/cmake-build-debug/CMakeFiles/hybrid_astar_global_planner.dir
